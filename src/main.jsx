@@ -10,7 +10,7 @@ import Main from './pages/main'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Router>
       <main className="bg-slate-300 text-slate-950 dark:bg-slate-900 dark:text-slate-100 
-      flex min-h-screen flex-col items-center justify-between p-24 ">
+      flex h-screen flex-col items-center justify-between ">
         <Routes>
           <Route path='/' element={ <Main/> }/>
           <Route path='/login' element={ <Login/> }/>
