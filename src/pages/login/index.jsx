@@ -2,7 +2,7 @@ import { Link, useNavigate }  from "react-router-dom";
 import { useState, useEffect } from 'react'
 
 export default function Login() {
-    const EXPRESS_URL = `${import.meta.env.VITE_EXPRESS_URL}/usuarios/login`
+    const EXPRESS_URL = `${import.meta.env.VITE_EXPRESS_URL}usuarios/login`
     const navigate = useNavigate();
     const [ formValid, setFormValid ] = useState(false)
     const [ formData, setFormData ] = useState({
@@ -17,7 +17,6 @@ export default function Login() {
             else {
                 setFormValid(false)
             }
-            /* console.log(formData,formValid) */
         }, [formData, formValid]
     )
 
@@ -33,7 +32,7 @@ export default function Login() {
     const handleSubmit = async(e) => {
         e.preventDefault()
         alert("submit feito")
-/*         try {
+        try {
             const res = await fetch(EXPRESS_URL, {
                 method: 'POST',
                 body: JSON.stringify(formData),
@@ -41,22 +40,23 @@ export default function Login() {
                     'Content-Type': 'application/json'
                 },
             })
+            console.log(await res.json())
             if(res.status == 200) navigate('/')
-                else alert("erro!") 
+                else alert("Login inválido!") 
         } catch (err) {
             console.log(err)
             alert("error")
-        } */
+        }
     }
 
     return (
         <div className="
-        w-full h-full sm:p-0 rounded-none
+        w-screen h-full sm:p-0 rounded-none
         lg:w-4/5 lg:h-full lg:p-24 lg:m-24 lg:rounded-3xl
         dark:bg-slate-950 bg-slate-200 
-        flex flex-row justify-center items-center">
+        flex flex-row justify-around items-center">
             <form onSubmit={handleSubmit}
-            className="grid grid-cols-1 grid-rows-6 gap-4 items-start">
+            className="w-screen p-32 grid grid-cols-1 grid-rows-6 gap-4 items-start">
                 <div className="flex justify-center">
                     <h1 className="text-4xl font-bold">Entrar</h1>
                 </div>
@@ -69,28 +69,12 @@ export default function Login() {
                     type="text" name="email"/>
                 </div>
                 <div className="grid grid-cols-4 gap-4">
-                    <label>Usuário</label>
-                    <input onChange={handleInputChange} className="col-start-2 col-end-5
-                    pb-0 transition-all focus:pb-2
-                    outline-none bg-transparent 
-                    border-slate-400 dark:border-slate-500 border-solid border-b-2" 
-                    type="text" name="username"/>
-                </div>
-                <div className="grid grid-cols-4 gap-4">
-                    <p>Senha</p>
+                    <label>Senha</label>
                     <input onChange={handleInputChange} className="col-start-2 col-end-5
                     pb-0 transition-all focus:pb-2
                     outline-none bg-transparent 
                     border-slate-400 dark:border-slate-500 border-solid border-b-2" 
                     type="password" name="senha"/>
-                </div>
-                <div className="grid grid-cols-4 gap-4">
-                    <p> Confirme Senha </p>
-                    <input onChange={handleInputChange} className="col-start-2 col-end-5
-                    pb-0 transition-all focus:pb-2
-                    outline-none bg-transparent 
-                    border-slate-400 dark:border-slate-500 border-solid border-b-2" 
-                    type="password" name="senhaconf"/>
                 </div>
                 <div className="flex justify-center">
                     <input className= {`dark:bg-slate-950 dark:text-slate-200 bg-slate-200 text-slate-950

@@ -2,7 +2,7 @@ import { Link, useNavigate }  from "react-router-dom";
 import { useState, useEffect } from 'react'
 
 export default function Register() {
-    const EXPRESS_URL = `${import.meta.env.VITE_EXPRESS_URL}/usuarios`
+    const EXPRESS_URL = `${import.meta.env.VITE_EXPRESS_URL}usuarios`
     const navigate = useNavigate();
     const [ formValid, setFormValid ] = useState(false)
     const [ formData, setFormData ] = useState({
@@ -21,7 +21,6 @@ export default function Register() {
             else {
                 setFormValid(false)
             }
-            /* console.log(formData,formValid) */
         }, [formData, formValid]
     )
 
@@ -36,7 +35,6 @@ export default function Register() {
 
     const handleSubmit = async(e) => {
         e.preventDefault()
-        alert("submit feito")
         try {
             const res = await fetch(EXPRESS_URL, {
                 method: 'POST',
@@ -45,8 +43,9 @@ export default function Register() {
                     'Content-Type': 'application/json'
                 },
             })
+            console.log(res)
             if(res.status == 200) navigate('/')
-                else alert("erro!") 
+                else alert("Os dados passados são inválidos!")
         } catch (err) {
             console.log(err)
             alert("error")
@@ -60,7 +59,7 @@ export default function Register() {
         dark:bg-slate-950 bg-slate-200 
         flex flex-row justify-center items-center">
             <form onSubmit={handleSubmit}
-            className="grid grid-cols-1 grid-rows-6 gap-4 items-start">
+            className=" w-screen p-8 grid grid-cols-1 grid-rows-6 gap-4 items-start">
                 <div className="flex justify-center">
                     <h1 className="text-4xl font-bold">Bem-vindo</h1>
                 </div>
