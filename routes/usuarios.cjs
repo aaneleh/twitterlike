@@ -12,9 +12,9 @@ router.get('/', async(req, res) => {
 })
 
 router.post('/', async(req, res) => {
-    let email = await Usuario.find({ email: req.body.email }, { email: 1, _id: 0});
-
-    if(email.length) return res.status(400).json({message: "Este usuario já existe"})
+    //procura o usuario, se já existe retorna um erro
+    let query = await Usuario.find({ email: req.body.email }, { _id: 1});
+    if(query.length) return res.status(400).json({message: "Este usuario já existe"})
 
     const usuario = new Usuario({
         username: req.body.username,
@@ -23,9 +23,11 @@ router.post('/', async(req, res) => {
     })
 
     try {
+        //salva o usuario no bd
         const novoUsuario = await usuario.save()
         console.log('Novo Usuario:', novoUsuario)
-        return res.json({message: "Usuario criado"}).status(201)
+
+        return res.status(200).json({ id: novoUsuario._id.toString()})
     } catch (err){
         return res.status(400)
     }

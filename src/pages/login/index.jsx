@@ -1,9 +1,11 @@
 import { Link, useNavigate }  from "react-router-dom";
 import { useState, useEffect } from 'react'
+import { useLogon } from '../../contexts/LogonContext'
 
 export default function Login() {
     const EXPRESS_URL = `${import.meta.env.VITE_EXPRESS_URL}usuarios/login`
     const navigate = useNavigate();
+    const { login } = useLogon()
     const [ formValid, setFormValid ] = useState(false)
     const [ formData, setFormData ] = useState({
         email: '',
@@ -40,7 +42,10 @@ export default function Login() {
                     'Content-Type': 'application/json'
                 },
             })
-            console.log(await res.json())
+
+            let id = await res.json()
+            login(await id.id)
+
             if(res.status == 200) navigate('/')
                 else alert("Login inválido!") 
         } catch (err) {

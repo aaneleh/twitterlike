@@ -1,9 +1,11 @@
 import { Link, useNavigate }  from "react-router-dom";
 import { useState, useEffect } from 'react'
+import { useLogon } from '../../contexts/LogonContext'
 
 export default function Register() {
     const EXPRESS_URL = `${import.meta.env.VITE_EXPRESS_URL}usuarios`
-    const navigate = useNavigate();
+    const navigate = useNavigate()
+    const { login } = useLogon()
     const [ formValid, setFormValid ] = useState(false)
     const [ formData, setFormData ] = useState({
         username: '',
@@ -35,6 +37,7 @@ export default function Register() {
 
     const handleSubmit = async(e) => {
         e.preventDefault()
+
         try {
             const res = await fetch(EXPRESS_URL, {
                 method: 'POST',
@@ -43,7 +46,10 @@ export default function Register() {
                     'Content-Type': 'application/json'
                 },
             })
-            console.log(res)
+
+            let id = await res.json()
+            login(await id.id)
+
             if(res.status == 200) navigate('/')
                 else alert("Os dados passados são inválidos!")
         } catch (err) {
@@ -69,7 +75,7 @@ export default function Register() {
                     pb-0 transition-all focus:pb-2
                     outline-none bg-transparent 
                     border-slate-400 dark:border-slate-500 border-solid border-b-2" 
-                    type="text" name="email"/>
+                    type="text" name="email" />
                 </div>
                 <div className="grid grid-cols-4 gap-4">
                     <label>Usuário</label>
@@ -77,7 +83,7 @@ export default function Register() {
                     pb-0 transition-all focus:pb-2
                     outline-none bg-transparent 
                     border-slate-400 dark:border-slate-500 border-solid border-b-2" 
-                    type="text" name="username"/>
+                    type="text" name="username" />
                 </div>
                 <div className="grid grid-cols-4 gap-4">
                     <p>Senha</p>
@@ -85,7 +91,7 @@ export default function Register() {
                     pb-0 transition-all focus:pb-2
                     outline-none bg-transparent 
                     border-slate-400 dark:border-slate-500 border-solid border-b-2" 
-                    type="password" name="senha"/>
+                    type="password" name="senha" />
                 </div>
                 <div className="grid grid-cols-4 gap-4">
                     <p> Confirme Senha </p>
@@ -93,7 +99,7 @@ export default function Register() {
                     pb-0 transition-all focus:pb-2
                     outline-none bg-transparent 
                     border-slate-400 dark:border-slate-500 border-solid border-b-2" 
-                    type="password" name="senhaconf"/>
+                    type="password" name="senhaconf" />
                 </div>
                 <div className="flex justify-center">
                     <input className= {`dark:bg-slate-950 dark:text-slate-200 bg-slate-200 text-slate-950
