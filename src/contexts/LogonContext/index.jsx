@@ -7,19 +7,17 @@ export function useLogon(){
 }
 
 export function LogonProvider({children}) {
-
-    //ve se tem algo no local storage
     
     const [logonId, setLogonId] = useState( null )
 
     function login(id) {
         setLogonId(id)
-        //salva no local storage também
+        localStorage.setItem("logonId", id)
     }
 
     function logoff(){
         setLogonId(null)
-        //limpa o local storage também
+        localStorage.removeItem("logonId");
     }
 
     return(

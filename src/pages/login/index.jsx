@@ -33,7 +33,6 @@ export default function Login() {
 
     const handleSubmit = async(e) => {
         e.preventDefault()
-        alert("submit feito")
         try {
             const res = await fetch(EXPRESS_URL, {
                 method: 'POST',
@@ -86,7 +85,7 @@ export default function Login() {
                     transition-all hover:bg-slate-950 hover:text-slate-200 dark:hover:bg-slate-200 dark:hover:text-slate-950
                     border-solid border-2 border-slate-700 dark:border-slate-200
                     w-full pt-4 pb-4 pt-2 rounded-3xl ${formValid ? "cursor-pointer" : "cursor-not-allowed" }`}
-                    type="submit" name="submit" title={!formValid ? "Preencha todos os campos corretamente" : null} value="Criar conta" disabled={!formValid}/>
+                    type="submit" name="submit" title={!formValid ? "Preencha todos os campos corretamente" : null} value="Entrar" disabled={!formValid}/>
                 </div>
                 <div className="flex justify-center">
                     <Link to="/register" className="underline font-light text-sm">Não possui conta? Cadastre-se aqui</Link>

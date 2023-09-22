@@ -37,7 +37,6 @@ export default function Register() {
 
     const handleSubmit = async(e) => {
         e.preventDefault()
-
         try {
             const res = await fetch(EXPRESS_URL, {
                 method: 'POST',
