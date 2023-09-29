@@ -34,11 +34,11 @@ router.post('/', async(req, res) => {
 })
 
 router.post('/login', async(req, res) => {
-    let query = await Usuario.find({ email: req.body.email, senha: req.body.senha }, {_id: 1});
+    let query = await Usuario.find({ email: req.body.email, senha: req.body.senha }, {_id: 1, username: 1});
 
     if(!query.length) return res.status(400).json({message: "Este usuario não existe"})
 
-    return res.status(200).json({ id: query[0]._id.toString()})
+    return res.status(200).json({ id: query[0]._id.toString(), username: query[0].username.toString()})
 
 })
 

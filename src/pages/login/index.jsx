@@ -42,8 +42,8 @@ export default function Login() {
                 },
             })
 
-            let id = await res.json()
-            login(await id.id)
+            let json = await res.json()
+            login(await json.id, await json.username)
 
             if(res.status == 200) navigate('/')
                 else alert("Login inválido!") 

@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { useLogon } from '../../contexts/LogonContext'
-import Sidebar from "../../components/sidebar";
-import Write from "../../components/write";
+import Sidebar from '../../components/sidebar'
 
-export default function Home() {
-    const { logonUsername, checkLogin } = useLogon()
+export default function Notifications() {
+
+    const {  checkLogin } = useLogon()
 
     useEffect(() => {
         checkLogin()
@@ -16,9 +16,9 @@ export default function Home() {
                 <Sidebar />
             </aside>
             <main className="ml-16">
-                <h2>Bem-vindo de volta, { logonUsername } </h2>
-                <Write/>
+
             </main>
         </div>
     )
+
 }
