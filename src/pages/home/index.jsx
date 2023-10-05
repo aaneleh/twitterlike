@@ -11,12 +11,12 @@ export default function Home() {
     }, [])
 
     return (
-        <div>
-            <aside className="w-16 fixed left-0 top-0">
-                <Sidebar />
+        <div className="w-screen flex">
+            <aside className="w-16 md:w-[18em]">
+                <Sidebar className=' fixed left-0 top-0'/>
             </aside>
-            <main className="ml-16">
-                <h2>Bem-vindo de volta, { logonUsername } </h2>
+            <main className="w-full overflow-y-scroll">
+                <h2 className="text-center">Bem-vindo de volta, { logonUsername } </h2>
                 <Write/>
             </main>
         </div>

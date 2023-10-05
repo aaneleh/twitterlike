@@ -3,7 +3,30 @@ const router = express.Router()
 const Post = require('../models/posts.cjs')
 
 router.get('/', async(req, res) => {
+    try {
+        const todosPosts = await Post.find()
+        res.json(todosPosts)
+    } catch (err){
+        res.status(500).json({message: err.message})
+    }
+})
 
+router.get('/:id_post', async(req, res) => {
+    try {
+        const postsUser = await /* Post.find() */
+        res.json(postsUser)
+    } catch (err){
+        res.status(500).json({message: err.message})
+    }
+})
+
+router.get('/user/:id_user', async(req, res) => {
+    try {
+        const postsUser = await Post.find()
+        res.json(postsUser)
+    } catch (err){
+        res.status(500).json({message: err.message})
+    }
 })
 
 router.post('/', async(req, res) => {
