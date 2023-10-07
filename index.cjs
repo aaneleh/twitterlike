@@ -19,7 +19,7 @@ db.once('open', () => console.log('Banco de dados conectado'))
 app.use(express.json())
 app.use(express.urlencoded( {extended: true} )); //permite acessar dados vindos de forms
 
-app.use('/usuarios', usuariosRouter)
+app.use('/user', usuariosRouter)
 app.use('/posts', postsRouter)
 
 app.listen(process.env.PORT, ()=> console.log(`Server iniciado porta ${process.env.PORT}`))

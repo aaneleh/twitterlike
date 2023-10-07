@@ -3,6 +3,7 @@ const router = express.Router()
 const Usuario = require('../models/usuarios.cjs')
 
 router.get('/', async(req, res) => {
+    console.log('Req recebido get user/ ')
     try {
         const usuarios = await Usuario.find()
         res.json(usuarios)
@@ -11,7 +12,19 @@ router.get('/', async(req, res) => {
     }
 })
 
+router.get('/:id_user', async(req, res) => {
+    console.log(`Req recebido get user/${req.params.id_user}`)
+    try {
+        const usuarios = await Usuario.find({_id: req.params.id_user})
+        res.json(usuarios)
+    } catch (err){
+        res.status(500).json({message: err.message})
+    }
+})
+
 router.post('/', async(req, res) => {
+    console.log('Req recebido post user/ ')
+
     //procura o usuario, se já existe retorna um erro
     let query = await Usuario.find({ email: req.body.email }, { _id: 1});
     if(query.length) return res.status(400).json({message: "Este usuario já existe"})
@@ -34,6 +47,8 @@ router.post('/', async(req, res) => {
 })
 
 router.post('/login', async(req, res) => {
+    console.log('Req recebido post user/login ')
+
     let query = await Usuario.find({ email: req.body.email, senha: req.body.senha }, {_id: 1, username: 1});
 
     if(!query.length) return res.status(400).json({message: "Este usuario não existe"})
@@ -43,6 +58,8 @@ router.post('/login', async(req, res) => {
 })
 
 router.delete('/:id', async(req, res)=> {
+    console.log('Req recebido delete user/:id ')
+
     try {
         let usuario = await Usuario.findById(req.params.id)
         

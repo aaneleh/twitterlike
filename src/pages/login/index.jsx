@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { useLogon } from '../../contexts/LogonContext'
 
 export default function Login() {
-    const EXPRESS_URL = `${import.meta.env.VITE_EXPRESS_URL}usuarios/login`
+    const EXPRESS_URL = `${import.meta.env.VITE_EXPRESS_URL}user/login`
     const navigate = useNavigate();
     const { login } = useLogon()
     const [ formValid, setFormValid ] = useState(false)

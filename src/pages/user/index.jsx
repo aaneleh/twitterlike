@@ -3,14 +3,13 @@ import { useParams } from 'react-router-dom';
 import { useLogon } from '../../contexts/LogonContext'
 import Sidebar from '../../components/sidebar'
 import Write from '../../components/write'
-import Post from "../../components/post";
-
+import Post from '../../components/post'
 
 
 export default function User() {
     const EXPRESS_URL = `${import.meta.env.VITE_EXPRESS_URL}posts/user`
     const { id } = useParams();
-    const {  checkLogin } = useLogon()
+    const { checkLogin } = useLogon()
     const [ post, setPosts ] = useState([])
 
     const loadPosts = async () => {
@@ -20,7 +19,7 @@ export default function User() {
             })
 
             if(res.status == 200) setPosts(await res.json()) 
-                else setPosts("Esse usuario nem tem posts ainda") 
+
         } catch (err) {
             console.log(err)
             alert("error")
@@ -29,7 +28,6 @@ export default function User() {
 
     useEffect( () => {
         checkLogin()
-        
         loadPosts()
     }, [])
 
@@ -40,16 +38,17 @@ export default function User() {
             </aside>
             <main className="w-full flex flex-col items-center">
                 <Write/>
-
-                {post.map( (value) => {
-                    console.log(value)
-
-                    return <Post key={value._id} user_id={value.user_id} post_id={value._id}>
-                        {value.post}
-                    </Post>
-
-                } )}
-
+                {
+                    /* não testei esse length, pode dar problemas no futuro */
+                    post.length == 0 ?
+                        <p>Esse usuário ainda não fez uma postagem</p> 
+                        :
+                        post.map( (value) => {
+                            return <Post key={value._id} user_id={value.user_id} post_id={value._id}>
+                                {value.post}
+                            </Post>
+                        } )
+                }
             </main>
         </div>
     )

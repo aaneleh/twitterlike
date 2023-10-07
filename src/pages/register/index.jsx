@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { useLogon } from '../../contexts/LogonContext'
 
 export default function Register() {
-    const EXPRESS_URL = `${import.meta.env.VITE_EXPRESS_URL}usuarios`
+    const EXPRESS_URL = `${import.meta.env.VITE_EXPRESS_URL}user`
     const navigate = useNavigate()
     const { login } = useLogon()
     const [ formValid, setFormValid ] = useState(false)
