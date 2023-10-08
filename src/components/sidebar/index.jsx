@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 export default function Sidebar() {
 
-    const { logoff, logonId } = useLogon()
+    const { logoff, logonId, logonUsername } = useLogon()
 
     return (
         <div className='h-screen p-8 pt-16 flex flex-col items-center gap-16 text-4xl
@@ -25,7 +25,7 @@ export default function Sidebar() {
                 hover:bg-slate-950 hover:text-slate-200
                 dark:hover:bg-slate-200 dark:hover:text-slate-950'>
                 <BsPersonCircle/>
-                <p className='text-base invisible absolute col-span-2 md:visible md:relative truncate'>Nome usuario</p> 
+                <p className='text-base invisible absolute col-span-2 md:visible md:relative truncate'> {logonUsername} </p> 
             </Link>
             <Link to="/notifications"
                 className='p-2 rounded-full transition duration-200

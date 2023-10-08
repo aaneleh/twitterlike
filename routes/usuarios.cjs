@@ -12,8 +12,8 @@ router.get('/', async(req, res) => {
     }
 })
 
+//SELECIONA USUARIO PELO ID
 router.get('/:id_user', async(req, res) => {
-    console.log(`Req recebido get user/${req.params.id_user}`)
     try {
         const usuarios = await Usuario.find({_id: req.params.id_user})
         res.json(usuarios)
@@ -22,9 +22,19 @@ router.get('/:id_user', async(req, res) => {
     }
 })
 
-router.post('/', async(req, res) => {
-    console.log('Req recebido post user/ ')
+//SELECIONA USUARIO PELO USERNAME
+router.get('/search/:username', async(req, res) => {
+    try {
+        const users = await Usuario.find({'username': {$regex : req.params.username} })
+        res.json(users)
+    } catch (err) {
+        res.status(500).json({message: err.message})
+    }
 
+})
+
+//INSERE UM NOVO USUARIO
+router.post('/', async(req, res) => {
     //procura o usuario, se já existe retorna um erro
     let query = await Usuario.find({ email: req.body.email }, { _id: 1});
     if(query.length) return res.status(400).json({message: "Este usuario já existe"})
@@ -46,18 +56,16 @@ router.post('/', async(req, res) => {
     }
 })
 
+//PROCURA O USUARIO E RETORNA O ID
 router.post('/login', async(req, res) => {
-    console.log('Req recebido post user/login ')
-
     let query = await Usuario.find({ email: req.body.email, senha: req.body.senha }, {_id: 1, username: 1});
 
     if(!query.length) return res.status(400).json({message: "Este usuario não existe"})
 
     return res.status(200).json({ id: query[0]._id.toString(), username: query[0].username.toString()})
-
 })
 
-router.delete('/:id', async(req, res)=> {
+/* router.delete('/:id', async(req, res)=> {
     console.log('Req recebido delete user/:id ')
 
     try {
@@ -73,6 +81,6 @@ router.delete('/:id', async(req, res)=> {
         console.log(err)
     }
 
-})
+}) */
 
 module.exports = router

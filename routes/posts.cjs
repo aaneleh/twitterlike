@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Post = require('../models/posts.cjs')
 
+//SELECIONA TODOS
 router.get('/', async(req, res) => {
     try {
         const todosPosts = await Post.find()
@@ -11,24 +12,39 @@ router.get('/', async(req, res) => {
     }
 })
 
-router.get('/:id_post', async(req, res) => {
-    try {
-        const postsUser = await /* Post.find() */
-        res.json(postsUser)
-    } catch (err){
-        res.status(500).json({message: err.message})
-    }
-})
-
-router.get('/user/:id_user', async(req, res) => {
+//SELECIONA APENAS UM PELO ID
+/* router.get('/:id_post', async(req, res) => {
     try {
         const postsUser = await Post.find()
         res.json(postsUser)
     } catch (err){
         res.status(500).json({message: err.message})
     }
+}) */
+
+//SELECIONA AQUELE(S) QUE TEM TAL CONTEUDO
+router.get('/search/:content', async(req, res) => {
+    try {
+        const posts = await Post.find({'post': {$regex : req.params.content} })
+        res.json(posts)
+    } catch (err) {
+        res.status(500).json({message: err.message})
+    }
+
 })
 
+//SELECIONA TODOS POSTS DE UM USUARIO
+router.get('/user/:user_id', async(req, res) => {
+    console.log(req.params.id_user)
+    try {
+        const postsUser = await Post.find({'user_id': req.params.user_id})
+        res.json(postsUser)
+    } catch (err){
+        res.status(500).json({message: err.message})
+    }
+})
+
+//INSERE UM NOVO POST
 router.post('/', async(req, res) => {
     const tweet = new Post({
         user_id: req.body.id,
@@ -43,14 +59,6 @@ router.post('/', async(req, res) => {
         console.log(err)
         return res.status(400).json({"erro": err})
     }
-
-})
-
-router.post('/login', async(req, res) => {
-    
-})
-
-router.delete('/:id', async(req, res)=> {
 
 })
 

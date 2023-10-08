@@ -48,11 +48,13 @@ export default function Write() {
     return (
         <form onSubmit={handleSubmit} className="w-full flex flex-col items-center">
             <div>
-                <textarea className="bg-transparent border-2 rounded slate-950 text-slate-200 p-2 resize-none active:outine-none lg:w-[32em]"
+                <textarea className="bg-transparent border-2 rounded slate-950 text-slate-200 p-2
+                resize-none active:outine-none lg:w-[32em]
+                relative left-6"
                 onChange={handleInputChange} name="tweet" cols="35" rows="5" placeholder="Lorem Ipsum..." >
                 </textarea>
                 <button onClick={handleSubmit} disabled={!tweetValid}
-                    className={`relative right-10
+                    className={`relative right-4
                     bg-slate-200 rounded-full text-slate-950 p-2 pt-3 pr-3 text-2xl
                     border-2 hover:bg-slate-900 hover:text-slate-200 transition duration-125 col-start-2
                     ${tweetValid ? "cursor-pointer" : "cursor-not-allowed" }`}>
