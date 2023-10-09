@@ -65,6 +65,29 @@ router.post('/login', async(req, res) => {
     return res.status(200).json({ id: query[0]._id.toString(), username: query[0].username.toString()})
 })
 
+//ALTERA UM USUARIO
+router.patch('/:id', async(req, res) => {
+    try{
+        let user = await Usuario.findById(req.params.id)
+        console.log(user)
+        if(user == null) return res.sendStatus(404)
+        
+        if(req.body.username != null)
+            user.username = req.body.username
+        if(req.body.senha != null)
+            user.senha = req.body.senha
+
+        const userAtualizado = await user.save()
+        console.log(userAtualizado)
+        res.sendStatus(200)
+
+    } catch(err){
+        console.log(err)
+        return res.sendStatus(500)
+    }
+
+})
+
 /* router.delete('/:id', async(req, res)=> {
     console.log('Req recebido delete user/:id ')
 

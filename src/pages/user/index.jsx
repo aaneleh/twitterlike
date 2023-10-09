@@ -53,7 +53,7 @@ export default function User() {
                 <div className="text-2xl h-24 flex justify-between w-full items-center p-16 border-b-2 border-slate-700">
                     <h1>{username}</h1>
                     { logonId == id ? 
-                        <Link to="/"> <BsFillGearFill/> </Link>
+                        <Link to="/edit"> <BsFillGearFill/> </Link>
                     : ""}
                 </div>
                 <div className="py-8">

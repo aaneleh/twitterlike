@@ -15,7 +15,7 @@ router.get('/', async(req, res) => {
 //SELECIONA APENAS UM PELO ID
 /* router.get('/:id_post', async(req, res) => {
     try {
-        const postsUser = await Post.find()
+        const postsUser = await Post.findById()
         res.json(postsUser)
     } catch (err){
         res.status(500).json({message: err.message})
@@ -59,7 +59,20 @@ router.post('/', async(req, res) => {
         console.log(err)
         return res.status(400).json({"erro": err})
     }
+})
 
+//DELETA UM POST
+router.delete('/:id', async(req, res) => {
+    console.log(`Deletando post ${req.params.id}`)
+    try{
+        let post = await Post.findById(req.params.id)
+        if(post == null) return res.sendStatus(404)
+        await post.deleteOne()
+        res.sendStatus(200)
+    } catch(err){
+        res.status(500).json({ message: err.message })
+        console.log(err)
+    }
 })
 
 module.exports = router

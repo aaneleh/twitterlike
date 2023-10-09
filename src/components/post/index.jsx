@@ -4,22 +4,30 @@ import { useState, useEffect } from 'react'
 import { useLogon } from '../../contexts/LogonContext'
 
 export default function Post({children, user_id, post_id}) {
-    const EXPRESS_URL = `${import.meta.env.VITE_EXPRESS_URL}user`
+    const EXPRESS_URL = `${import.meta.env.VITE_EXPRESS_URL}`
     const [username, setUsername] = useState("Teste")
     const { logonId } = useLogon()
 
-    const seguir = (user_id) => {
-        /* alert(`agora seguindo ${user}`) */
+    const seguir = () => {
+        
     }
-    const curtir = (user_id) => {
-        /* alert(`agora seguindo ${user}`) */
+    const curtir = () => {
+        
     }
-    const excluir = (post_id) => {
-        /* alert(`agora seguindo ${user}`) */
+    const excluir = async () => {
+        try {
+            const res = await fetch(`${EXPRESS_URL}posts/${post_id}`, {
+                method: 'DELETE'
+            })
+            refreshPage()
+        } catch(err){
+            console.log(err)
+            alert("Erro!")
+        }
     }
     const loadUsername = async(user_id) => {
         try {
-            const res = await fetch(`${EXPRESS_URL}/${user_id}`, {
+            const res = await fetch(`${EXPRESS_URL}user/${user_id}`, {
                 method: 'GET'
             })
             if(res.status == 200) {
@@ -28,10 +36,14 @@ export default function Post({children, user_id, post_id}) {
             }
         } catch (err) {
             console.log(err)
-            alert("error")
+            /* alert("error") */
         }
     }
     
+    const refreshPage = () => {
+        window.location.reload()
+    }
+
     useEffect( () => {
         loadUsername(user_id)
     }, [])
@@ -45,12 +57,12 @@ export default function Post({children, user_id, post_id}) {
                 </Link>
                 {
                     logonId == user_id ?
-                        <span onClick={excluir(post_id)}
+                        <span onClick={excluir}
                             className='text-xl pr-3 cursor-pointer text-red-600 hover:text-red-300'>
                             <BsTrash3/>
                         </span>
                         :
-                        <span onClick={seguir(user_id)}
+                        <span onClick={seguir}
                             className='border-[1px] rounded p-[5px] hover:bg-slate-200 hover:text-slate-900 cursor-pointer'>
                             seguir
                         </span>

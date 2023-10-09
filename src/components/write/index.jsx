@@ -12,7 +12,6 @@ export default function Write() {
             else {
                 setTweetValid(false)
             }
-            console.log(tweet)
         }, [tweet, tweetValid]
     )
 
@@ -22,7 +21,6 @@ export default function Write() {
 
     const handleSubmit = async(e) => {
         e.preventDefault()
-        alert(`Enviando tweet: ${tweet}`)
         try {
             const res = await fetch(EXPRESS_URL, {
                 method: 'POST',
@@ -34,9 +32,7 @@ export default function Write() {
                     'Content-Type': 'application/json'
                 }
             })
-
-/*             console.log(await res) */
-            if(res.status == 200) alert ("Tweet feito com sucesso")
+            if(res.status == 200) refreshPage()
             else alert("Tweet não pôde ser feito")
 
         } catch (err) {
@@ -44,7 +40,9 @@ export default function Write() {
             alert("Tweet não pôde ser feito")
         }
     }
-
+    const refreshPage = () => {
+        window.location.reload()
+    }
     return (
         <form onSubmit={handleSubmit} className="w-full flex flex-col items-center">
             <div>

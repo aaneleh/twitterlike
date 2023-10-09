@@ -9,6 +9,7 @@ export default function Search() {
     const EXPRESS_URL = `${import.meta.env.VITE_EXPRESS_URL}`
     const { checkLogin } = useLogon()
     const [ search, setSearch ] = useState('')
+    const [ searchMade, setSearchMade ] = useState(false)
     const [ users, setUsers ] = useState([])
     const [ posts, setPosts ] = useState([])
 
@@ -25,12 +26,12 @@ export default function Search() {
     }
 
     const searchUsers = async(search) => {
-        if(search == '') return
         try {
             const res = await fetch(`${EXPRESS_URL}user/search/${search}`, {
                 method: 'GET'
             })
             if(res.status == 200) setUsers(await res.json()) 
+            
         } catch (err) {
             console.log(err)
             alert("error")
@@ -38,7 +39,6 @@ export default function Search() {
     }
 
     const searchPosts = async(search) => {
-        if(search == '') return
         try {
             const res = await fetch(`${EXPRESS_URL}posts/search/${search}`, {
                 method: 'GET'
@@ -51,8 +51,13 @@ export default function Search() {
     }
 
     const loadSearch = () => {
+        if(search == ''){
+            setSearchMade(false)
+            return 
+        }
         searchUsers(search)
         searchPosts(search)
+        setSearchMade(true)
         console.log(users)
         console.log(posts)
     }
@@ -72,7 +77,7 @@ export default function Search() {
                     <button onClick={loadSearch}> <BsSearch className='text-2xl'/> </button>
                 </form>
                 {
-                    search != '' ?
+                    searchMade ?
                     <>
                         <section className="w-full flex flex-col items-center p-8 border-t-2 border-slate-700 ">
                             <h1 className='self-start text-lg'>Usuário</h1>
