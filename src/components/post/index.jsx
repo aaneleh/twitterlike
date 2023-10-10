@@ -8,9 +8,6 @@ export default function Post({children, user_id, post_id}) {
     const [username, setUsername] = useState("Teste")
     const { logonId } = useLogon()
 
-    const seguir = () => {
-        
-    }
     const curtir = () => {
         
     }
@@ -62,10 +59,7 @@ export default function Post({children, user_id, post_id}) {
                             <BsTrash3/>
                         </span>
                         :
-                        <span onClick={seguir}
-                            className='border-[1px] rounded p-[5px] hover:bg-slate-200 hover:text-slate-900 cursor-pointer'>
-                            seguir
-                        </span>
+                        <></>
                 }
             </div>
             <p

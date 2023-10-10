@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const app = express()
 const usuariosRouter = require('./routes/usuarios.cjs')
 const postsRouter = require('./routes/posts.cjs')
+const seguidoresRouter = require('./routes/seguidores.cjs')
 
 app.use(cors())
 app.use(express.json())
@@ -21,5 +22,6 @@ app.use(express.urlencoded( {extended: true} )); //permite acessar dados vindos 
 
 app.use('/user', usuariosRouter)
 app.use('/posts', postsRouter)
+app.use('/seguidores', seguidoresRouter)
 
 app.listen(process.env.PORT, ()=> console.log(`Server iniciado porta ${process.env.PORT}`))

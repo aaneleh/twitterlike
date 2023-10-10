@@ -4,6 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useLogon } from '../../contexts/LogonContext'
 import Sidebar from '../../components/sidebar'
 import Post from '../../components/post'
+import Follow from '../../components/follow';
 
 export default function User() {
     const EXPRESS_URL = `${import.meta.env.VITE_EXPRESS_URL}`
@@ -54,7 +55,9 @@ export default function User() {
                     <h1>{username}</h1>
                     { logonId == id ? 
                         <Link to="/edit"> <BsFillGearFill/> </Link>
-                    : ""}
+                    : 
+                        <Follow user_id={id}/>
+                    }
                 </div>
                 <div className="py-8">
                     {

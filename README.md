@@ -6,11 +6,8 @@ Rede social usando como base funções e interface do Twitter, agora X.
 App React utilizando banco de dados MongoDB integrandos com uma REST API com Express 
 
 * <img width="20px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" /> **React**  
-
 * <img width="20px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" /> **Express**  
-
 * <img width="20px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-plain-wordmark.svg" /> **MongoDB**  
-
 * <img width="20px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" /> **Tailwind CSS**  
 
 
@@ -20,9 +17,9 @@ App React utilizando banco de dados MongoDB integrandos com uma REST API com Exp
 - Editar dados do usuario logado  
 - Criar e excluir postagens  
 - Pesquisar usuários e postagens  
-
+- Seguir / deixar de seguir outros usuários  
 
 ### Em progresso  
 
-- Seguir outros usuários  
 - Página de notificações de novos seguidores  
+- Lista e contagem de seguidores e usuarios seguidos
