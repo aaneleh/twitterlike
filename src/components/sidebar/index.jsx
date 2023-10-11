@@ -8,7 +8,7 @@ export default function Sidebar() {
 
     return (
         <div className='h-screen p-8 pt-16 flex flex-col items-center gap-16 text-4xl
-            w-16 md:w-[8em]
+            w-16 md:w-[8em] md:items-start
             overflow-hidden
             border-r-2 border-slate-950 dark:border-slate-500'>
             <Link to="/" 
@@ -36,27 +36,31 @@ export default function Sidebar() {
                 <p className='text-base invisible absolute col-span-2 md:visible md:relative truncate'>Notificações</p> 
             </Link>
 
-            <div 
+{/*             <div 
                 className='p-2 rounded-full cursor-pointer hover:scale-125 transition
                 md:grid grid-cols-3 items-center gap-8' >
                 <BsPlusCircleFill/>
                 <p className='text-base invisible absolute col-span-2 md:visible md:relative truncate'>Postar Tweet</p> 
-            </div>  
+            </div>   */}
 
             <Link to="/search" 
-                className='p-2 cursor-pointer hover:scale-125 transition
-                md:grid grid-cols-3 items-center gap-8'>
+                className='p-2 rounded-full transition duration-200
+                md:grid grid-cols-3 items-center gap-8 
+                hover:bg-slate-950 hover:text-slate-200
+                dark:hover:bg-slate-200 dark:hover:text-slate-950'>
                 <BsSearch/>
                 <p className='text-base invisible absolute col-span-2 md:visible md:relative truncate'>Pesquisar</p> 
             </Link>
 
             <div 
-                className='p-2 cursor-pointer hover:scale-125 transition text-red-500
-                md:grid grid-cols-3 items-center gap-8' onClick={logoff}>
+                className='text-red-500 cursor-pointer 
+                p-2 rounded-full transition duration-200
+                md:grid grid-cols-3 items-center gap-8 
+                hover:bg-slate-950 hover:text-red-500
+                dark:hover:bg-red-500 dark:hover:text-slate-950' onClick={logoff}>
                 <BsBoxArrowRight />
                 <p className='text-base invisible absolute col-span-2 md:visible md:relative truncate'>Sair</p> 
             </div>
         </div>
     )
-
 }

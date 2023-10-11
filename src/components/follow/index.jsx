@@ -16,7 +16,7 @@ export default function Follow({user_id}) {
                 },
             })
             const json = await res.json()
-            setFollowing(json.seguindo)
+            setFollowing(json.quant > 0)
         } catch (err){
             console.log(err)
             alert("Ocorreu um erro!")

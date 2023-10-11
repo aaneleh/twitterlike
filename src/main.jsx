@@ -12,6 +12,8 @@ import User from './pages/user'
 import Notifications from './pages/notifications'
 import Search from './pages/search'
 import Edit from './pages/edit'
+import Seguidores from './pages/seguidores'
+import Seguindo from './pages/seguindo'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Router>
@@ -23,6 +25,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path='/login' element={ <Login/> }/>
           <Route path='/register' element={ <Register/> }/>
           <Route path='/user/:id' element={ <User/> }/>
+          <Route path='/user/:id/seguindo' element={ <Seguindo/> }/>
+          <Route path='/user/:id/seguidores' element={ <Seguidores/> }/>
           <Route path='/notifications' element={ <Notifications/> }/>
           <Route path='/search' element={ <Search/> }/>
           <Route path='/edit' element={ <Edit/> }/>

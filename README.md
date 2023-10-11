@@ -18,8 +18,8 @@ App React utilizando banco de dados MongoDB integrandos com uma REST API com Exp
 - Criar e excluir postagens  
 - Pesquisar usuários e postagens  
 - Seguir / deixar de seguir outros usuários  
+- Lista e contagem de seguidores e usuarios seguidos
 
 ### Em progresso  
 
-- Página de notificações de novos seguidores  
-- Lista e contagem de seguidores e usuarios seguidos
+- Página de notificações de novos seguidores 

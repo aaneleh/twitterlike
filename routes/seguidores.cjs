@@ -35,9 +35,15 @@ router.post('/', async(req, res) => {
 //SELECIONA ID DE USUARIO SEGUIDOS POR ESSA PESSOA
 router.post('/seguindo', async(req, res) => {
     try {
-        let query = await Seguidor.find({ seguidor_id: req.body.seguidor_id, seguindo_id: req.body.seguindo_id})
-        if(query.length) return res.json({seguindo: true})
-        return res.json({seguindo: false})
+        let query;
+        if(req.body.seguidor_id == null) {
+            query = await Seguidor.find({ seguindo_id: req.body.seguindo_id})
+        } else if(req.body.seguindo_id == null){
+            query = await Seguidor.find({ seguidor_id: req.body.seguidor_id})
+        } else {
+            query = await Seguidor.find({ seguidor_id: req.body.seguidor_id, seguindo_id: req.body.seguindo_id})
+        }
+        return res.json({query: query})
     } catch (err){
         res.status(500).json({message: err.message})
     }

@@ -5,6 +5,7 @@ import { useLogon } from '../../contexts/LogonContext'
 import Sidebar from '../../components/sidebar'
 import Post from '../../components/post'
 import Follow from '../../components/follow';
+import ContSeguidor from '../../components/contSeguidor'
 
 export default function User() {
     const EXPRESS_URL = `${import.meta.env.VITE_EXPRESS_URL}`
@@ -51,13 +52,23 @@ export default function User() {
                 <Sidebar className=' fixed left-0 top-0'/>
             </aside>
             <main className="w-full flex flex-col items-center">
-                <div className="text-2xl h-24 flex justify-between w-full items-center p-16 border-b-2 border-slate-700">
-                    <h1>{username}</h1>
-                    { logonId == id ? 
-                        <Link to="/edit"> <BsFillGearFill/> </Link>
-                    : 
-                        <Follow user_id={id}/>
-                    }
+                <div className='w-full border-b-2 border-slate-700 px-16'>
+                    <div className="text-2xl h-24 flex justify-between w-full items-center pt-16 ">
+                        <h1>{username}</h1>
+                        { logonId == id ? 
+                            <Link to="/edit"> <BsFillGearFill/> </Link>
+                            : 
+                            <Follow user_id={id}/>
+                        }
+                    </div>
+                    <div className='flex justify-between w-full items-center p-16 underline'>
+                        <Link to={`/user/${id}/seguindo`}> 
+                            Seguindo <ContSeguidor seguidor_id={id} seguindo_id={null} />
+                        </Link> 
+                        <Link to={`/user/${id}/seguidores`}> 
+                            Seguidores <ContSeguidor seguidor_id={null} seguindo_id={id} />
+                        </Link> 
+                    </div>
                 </div>
                 <div className="py-8">
                     {
