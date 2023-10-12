@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { useLogon } from '../../contexts/LogonContext'
 import { useState, useEffect } from 'react'
 import Follow from '../follow'
-import ContSeguidor from '../contSeguidor'
+import FollowCounter from '../followCounter'
 
 export default function UserCard({user_id}) {
     const EXPRESS_URL = `${import.meta.env.VITE_EXPRESS_URL}`
@@ -44,11 +44,11 @@ export default function UserCard({user_id}) {
                 }
             </div>
             <div className='w-full flex flex-row justify-start gap-8 py-4 underline'>
-                <Link to={`/user/${user_id}/seguindo`} > 
-                    Seguindo <ContSeguidor seguidor_id={user_id} seguindo_id={null} />
+                <Link to={`/user/${user_id}/following`} > 
+                    Seguindo <FollowCounter follower_id={user_id} following_id={null} />
                 </Link> 
-                <Link to={`/user/${user_id}/seguidores`} > 
-                    Seguidores <ContSeguidor seguidor_id={null} seguindo_id={user_id} />
+                <Link to={`/user/${user_id}/followers`} > 
+                    Seguidores <FollowCounter follower_id={null} following_id={user_id} />
                 </Link> 
             </div>
         </div>

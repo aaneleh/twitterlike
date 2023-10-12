@@ -1,20 +1,20 @@
 import { useState, useEffect } from 'react'
 
-export default function ContSeguidor({seguidor_id, seguindo_id}) {
+export default function FollowCounter({follower_id, following_id}) {
     const EXPRESS_URL = `${import.meta.env.VITE_EXPRESS_URL}`
-    const [ quantSeguidor, setQuantSeguidor] = useState(false)
+    const [ followCount, setFollowCount] = useState(false)
 
-    const querySeguidor = async() => {
+    const queryFollows = async() => {
         try {
-            const res = await fetch(`${EXPRESS_URL}seguidores/seguindo`, {
+            const res = await fetch(`${EXPRESS_URL}follow/seguindo`, {
                 method: 'POST',
-                body: JSON.stringify({seguidor_id: seguidor_id, seguindo_id: seguindo_id}),
+                body: JSON.stringify({follower_id: follower_id, following_id: following_id}),
                 headers: {
                     'Content-Type': 'application/json'
                 },
             })
             const json = await res.json()
-            setQuantSeguidor(json.query.length)
+            setFollowCount(json.query.length)
         } catch (err){
             console.log(err)
             alert("Ocorreu um erro!")
@@ -22,12 +22,12 @@ export default function ContSeguidor({seguidor_id, seguindo_id}) {
     }
 
     useEffect( () => {
-        querySeguidor()
+        queryFollows()
     }, [])
 
     return (
         <>
-            { quantSeguidor }
+            { followCount }
         </>
     )
 }

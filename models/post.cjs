@@ -9,7 +9,7 @@ const postSchema = new mongoose.Schema({
         type:String,
         required: true
     },
-    dataPublicacao: {
+    datePosted: {
         type: Date,
         required: true,
         default: new Date()

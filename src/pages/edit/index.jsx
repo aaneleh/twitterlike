@@ -12,8 +12,8 @@ export default function Edit() {
     const [ formData, setFormData ] = useState({
         username: '',
         email: '',
-        senha: '',
-        senhaconf: ''
+        password: '',
+        passwordConfirm: ''
     })
 
     const handleInputChange = (e) => {
@@ -36,8 +36,8 @@ export default function Edit() {
                 setFormData({
                     username: json[0].username,
                     email: json[0].email,
-                    senha: json[0].senha,
-                    senhaconf: json[0].senha
+                    password: json[0].password,
+                    passwordConfirm: json[0].password
                 })
             }
         } catch(err){
@@ -46,7 +46,7 @@ export default function Edit() {
         }
     }
 
-    const editar = async() => {
+    const edit = async() => {
         if(!logonId) return
         console.log(JSON.stringify(formData))
         try {
@@ -64,7 +64,7 @@ export default function Edit() {
         }
     }
 
-    const deletar = async() => {
+    const deletes = async() => {
         if(!logonId) return
         try {
             const res = await fetch(EXPRESS_URL, {
@@ -75,7 +75,7 @@ export default function Edit() {
                 },
             })
             console.log(res)
-            /* navigate(-1) */
+            navigate(-1)
         } catch(err){
             console.log(err)
             alert(err)
@@ -88,8 +88,8 @@ export default function Edit() {
 
     useEffect(() => {
         if( formData.username.length > 4 &&
-            formData.senha.length > 4 &&
-            formData.senhaconf == formData.senha 
+            formData.password.length > 4 &&
+            formData.passwordConfirm == formData.password 
         )  setFormValid(true)
         else {
             setFormValid(false)
@@ -123,21 +123,21 @@ export default function Edit() {
                             onChange={handleInputChange} value={formData.email} type="text" id="email" name="email"  disabled={true}/>
                     </div>
                     <div>
-                        <label htmlFor="senha">Senha: </label>
+                        <label htmlFor="password">password: </label>
                         <input className="text-slate-900"
-                            onChange={handleInputChange} value={formData.senha} type="password" id="senha" name="senha"  />
+                            onChange={handleInputChange} value={formData.password} type="password" id="password" name="password"  />
                     </div>
                     <div>
-                        <label htmlFor="senhaconf">Confirme a senha: </label>
+                        <label htmlFor="passwordConfirm">Confirme a password: </label>
                         <input className="text-slate-900"
-                            onChange={handleInputChange} value={formData.senhaconf} type="password" id="senhaconf" name="senhaconf"  />
+                            onChange={handleInputChange} value={formData.passwordConfirm} type="password" id="passwordConfirm" name="passwordConfirm"  />
                     </div>
                     <div>
                         <button className="text-red-500" onClick={() => navigate(-1)}>Cancelar</button>
-                        <button className={`border-2 border-current p-2 rounded ${formValid ? "cursor-pointer" : "cursor-not-allowed"}`} onClick={editar} disabled={formValid ? false : true}>Salvar alterações</button>
+                        <button className={`border-2 border-current p-2 rounded ${formValid ? "cursor-pointer" : "cursor-not-allowed"}`} onClick={edit} disabled={formValid ? false : true}>Salvar alterações</button>
                     </div>
                 </form>
-                <button onClick={deletar}>Excluir conta</button>
+                <button onClick={deletes}>Excluir conta</button>
             </main>
         </div>
     )

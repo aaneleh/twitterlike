@@ -5,7 +5,7 @@ import { useLogon } from '../../contexts/LogonContext'
 import Sidebar from '../../components/sidebar'
 import Post from '../../components/post'
 import Follow from '../../components/follow';
-import ContSeguidor from '../../components/contSeguidor'
+import FollowCounter from '../../components/followCounter'
 
 export default function User() {
     const EXPRESS_URL = `${import.meta.env.VITE_EXPRESS_URL}`
@@ -30,7 +30,7 @@ export default function User() {
     }
     const loadPosts = async (id) => {
         try {
-            const res = await fetch(`${EXPRESS_URL}posts/user/${id}`, {
+            const res = await fetch(`${EXPRESS_URL}post/user/${id}`, {
                 method: 'GET'
             })
             if(res.status == 200) setPosts(await res.json()) 
@@ -62,11 +62,11 @@ export default function User() {
                         }
                     </div>
                     <div className='flex justify-start gap-8 w-full items-center py-8 underline truncate'>
-                        <Link to={`/user/${id}/seguindo`} className='truncate'> 
-                            Seguindo <ContSeguidor seguidor_id={id} seguindo_id={null} />
+                        <Link to={`/user/${id}/following`} className='truncate'> 
+                            Seguindo <FollowCounter follower_id={id} following_id={null} />
                         </Link> 
-                        <Link to={`/user/${id}/seguidores`}  className='truncate'> 
-                            Seguidores <ContSeguidor seguidor_id={null} seguindo_id={id} />
+                        <Link to={`/user/${id}/followers`}  className='truncate'> 
+                            Seguidores <FollowCounter follower_id={null} following_id={id} />
                         </Link> 
                     </div>
                 </div> 

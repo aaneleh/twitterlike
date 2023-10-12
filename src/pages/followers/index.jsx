@@ -4,23 +4,22 @@ import { useParams, Link } from 'react-router-dom';
 import Sidebar from '../../components/sidebar'
 import UserCard from '../../components/userCard'
 
-export default function Seguindo() {
+export default function Followers() {
     const EXPRESS_URL = `${import.meta.env.VITE_EXPRESS_URL}`
     const { id } = useParams();
-    const [ seguindo, setSeguindo ] = useState([])
+    const [ followers, setFollowers ] = useState([])
 
-    const loadSeguindo = async (id) => {
+    const loadFollowers = async (id) => {
         try {
-            const res = await fetch(`${EXPRESS_URL}seguidores/seguindo`, {
+            const res = await fetch(`${EXPRESS_URL}follow/seguindo`, {
                 method: 'POST',
-                body: JSON.stringify({seguidor_id: id, seguindo_id: null}),
+                body: JSON.stringify({follower_id: null, following_id: id}),
                 headers: {
                     'Content-Type': 'application/json'
                 },
             })
             const json = await res.json()
-            console.log(json.query)
-            if(res.status == 200) setSeguindo(json.query) 
+            if(res.status == 200) setFollowers(json.query) 
         } catch (err) {
             console.log(err)
             alert("error")
@@ -28,7 +27,7 @@ export default function Seguindo() {
     }
 
     useEffect( () => {
-        loadSeguindo(id)
+        loadFollowers(id)
     }, [])
 
     return (
@@ -42,18 +41,18 @@ export default function Seguindo() {
                         <Link to={`/user/${id}`}>
                             <BsArrowLeft className='text-2xl'/>
                         </Link>
-                        Seguindo
+                        Seguidores
                     </div>
                 </div>
                 <div className="pt-2 w-full p-8">
                     {
-                        seguindo.length == 0 ?
-                            <p>Ainda não segue ninguém</p>
+                        followers.length == 0 ?
+                        <p>Não tem nenhum seguidor</p>
                         :
-                        seguindo.map( (value) => {
-                                return <UserCard key={value._id} user_id={ value.seguindo_id}/>
-                            })
-                        }
+                        followers.map( (value) => {
+                            return <UserCard key={value._id} user_id={ value.follower_id}/>
+                        })
+                    }
                 </div>
             </main>
         </div>

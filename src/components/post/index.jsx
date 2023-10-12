@@ -5,13 +5,13 @@ import { useLogon } from '../../contexts/LogonContext'
 
 export default function Post({children, user_id, post_id}) {
     const EXPRESS_URL = `${import.meta.env.VITE_EXPRESS_URL}`
-    const [username, setUsername] = useState("Teste")
+    const [username, setUsername] = useState('')
     const { logonId } = useLogon()
 
     const curtir = () => {
         
     }
-    const excluir = async () => {
+    const deletes = async () => {
         try {
             const res = await fetch(`${EXPRESS_URL}posts/${post_id}`, {
                 method: 'DELETE'
@@ -33,7 +33,7 @@ export default function Post({children, user_id, post_id}) {
             }
         } catch (err) {
             console.log(err)
-            /* alert("error") */
+            alert("Erro!")
         }
     }
     
@@ -54,7 +54,7 @@ export default function Post({children, user_id, post_id}) {
                 </Link>
                 {
                     logonId == user_id ?
-                        <span onClick={excluir}
+                        <span onClick={deletes}
                             className='text-xl pr-3 cursor-pointer text-red-600 hover:text-red-300'>
                             <BsTrash3/>
                         </span>

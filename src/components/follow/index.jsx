@@ -8,9 +8,9 @@ export default function Follow({user_id}) {
 
     const loadIsFollowing = async() => {
         try {
-            const res = await fetch(`${EXPRESS_URL}seguidores/seguindo`, {
+            const res = await fetch(`${EXPRESS_URL}follow/seguindo`, {
                 method: 'POST',
-                body: JSON.stringify({seguidor_id: logonId, seguindo_id: user_id}),
+                body: JSON.stringify({follower_id: logonId, following_id: user_id}),
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -23,11 +23,11 @@ export default function Follow({user_id}) {
         }
     }
 
-    const seguir = async() => {
+    const follow = async() => {
         try{
-            const res = await fetch(`${EXPRESS_URL}seguidores/`, {
+            const res = await fetch(`${EXPRESS_URL}follow/`, {
                 method: 'POST',
-                body: JSON.stringify({seguidor_id: logonId, seguindo_id: user_id, dataRealizada: new Date()}),
+                body: JSON.stringify({follower_id: logonId, following_id: user_id, dataRealizada: new Date()}),
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -41,11 +41,11 @@ export default function Follow({user_id}) {
         }
     }
 
-    const deixarSeguir = async() => {
+    const unfollow = async() => {
         try{
-            const res = await fetch(`${EXPRESS_URL}seguidores/deixarseguir`, {
+            const res = await fetch(`${EXPRESS_URL}follow/deixarseguir`, {
                 method: 'DELETE',
-                body: JSON.stringify({seguidor_id: logonId, seguindo_id: user_id}),
+                body: JSON.stringify({follower_id: logonId, following_id: user_id}),
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -67,12 +67,12 @@ export default function Follow({user_id}) {
         <>
             {
                 isFollowing ? 
-                    <span onClick={deixarSeguir}
+                    <span onClick={unfollow}
                     className='text-base text-center border-[1px] rounded p-[5px] hover:bg-slate-200 hover:text-slate-900 cursor-pointer'>
                         deixar de seguir
                     </span>
                 :
-                    <span onClick={seguir}
+                    <span onClick={follow}
                     className='text-base border-[1px] rounded p-[5px] bg-slate-200 text-slate-900 hover:bg-slate-900 hover:text-slate-200 cursor-pointer'>
                         seguir
                     </span>

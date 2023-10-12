@@ -3,9 +3,9 @@ const express = require('express')
 const cors = require('cors');
 const mongoose = require('mongoose')
 const app = express()
-const usuariosRouter = require('./routes/usuarios.cjs')
-const postsRouter = require('./routes/posts.cjs')
-const seguidoresRouter = require('./routes/seguidores.cjs')
+const userRouter = require('./routes/user.cjs')
+const postRouter = require('./routes/post.cjs')
+const followRouter = require('./routes/follow.cjs')
 
 app.use(cors())
 app.use(express.json())
@@ -20,8 +20,8 @@ db.once('open', () => console.log('Banco de dados conectado'))
 app.use(express.json())
 app.use(express.urlencoded( {extended: true} )); //permite acessar dados vindos de forms
 
-app.use('/user', usuariosRouter)
-app.use('/posts', postsRouter)
-app.use('/seguidores', seguidoresRouter)
+app.use('/user', userRouter)
+app.use('/post', postRouter)
+app.use('/follow', followRouter)
 
 app.listen(process.env.PORT, ()=> console.log(`Server iniciado porta ${process.env.PORT}`))

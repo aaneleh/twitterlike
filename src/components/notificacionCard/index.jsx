@@ -1,31 +1,31 @@
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
-export default function Notificacao({user_id, post_id, data}) {
+export default function NotificationCard({user_id, post_id, date}) {
     const EXPRESS_URL = `${import.meta.env.VITE_EXPRESS_URL}`
     const [username, setUsername] = useState('')
     const [date, setDate ] = useState('')
 
-    const loadData = () => {
-        const dataNotificacao = new Date(data)
-        const dataAtual = new Date()
-        let diferenca = Math.ceil((dataAtual - dataNotificacao) / 1000)
-        let texto = "seg atrás"
+    const loadDate = () => {
+        const dateNotification = new Date(date)
+        const currentDate = new Date()
+        let timeDifference = Math.ceil((currentDate - dateNotification) / 1000)
+        let timeText = "seg atrás"
 
-        if(diferenca >= 60) {
-            diferenca = Math.round(diferenca / 60)
-            texto = "min atrás"
+        if(timeDifference >= 60) {
+            timeDifference = Math.round(timeDifference / 60)
+            timeText = "min atrás"
 
-            if(diferenca >= 60) {
-                diferenca = Math.floor(diferenca / 60)
-                texto = "hr atrás"
+            if(timeDifference >= 60) {
+                timeDifference = Math.floor(timeDifference / 60)
+                timeText = "hr atrás"
 
-                if(diferenca >= 24) {
-                    diferenca = Math.floor(diferenca / 24)
-                    texto = "dia atrás"
-                    if(diferenca > 1)  texto = "dias atrás"
+                if(timeDifference >= 24) {
+                    timeDifference = Math.floor(timeDifference / 24)
+                    timeText = "dia atrás"
+                    if(timeDifference > 1)  timeText = "dias atrás"
         }}}
-        setDate(diferenca + texto)
+        setDate(timeDifference + timeText)
     }
 
     const loadUsername = async(user_id) => {
@@ -45,7 +45,7 @@ export default function Notificacao({user_id, post_id, data}) {
 
     useEffect( () => {
         loadUsername(user_id)
-        loadData()
+        loadDate()
     }, [])
 
 

@@ -1,12 +1,12 @@
 const express = require('express')
 const router = express.Router()
-const Post = require('../models/posts.cjs')
+const Post = require('../models/post.cjs')
 
 //SELECIONA TODOS
 router.get('/', async(req, res) => {
     try {
-        const todosPosts = await Post.find()
-        res.json(todosPosts)
+        const posts = await Post.find()
+        res.json(posts)
     } catch (err){
         res.status(500).json({message: err.message})
     }
@@ -46,14 +46,14 @@ router.get('/user/:user_id', async(req, res) => {
 
 //INSERE UM NOVO POST
 router.post('/', async(req, res) => {
-    const tweet = new Post({
+    const post = new Post({
         user_id: req.body.id,
         post: req.body.post
     })
 
     try{
-        const novoPost = await tweet.save()
-        console.log(novoPost)
+        const newPost = await post.save()
+        console.log(newPost)
         return res.sendStatus(200)
     } catch(err) {
         console.log(err)

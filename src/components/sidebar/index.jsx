@@ -1,4 +1,4 @@
-import { BsHouse, BsPersonCircle, BsBell, BsSearch, BsPlusCircleFill, BsBoxArrowInRight, BsBoxArrowRight } from 'react-icons/bs'
+import { BsHouse, BsPersonCircle, BsBell, BsSearch, BsBoxArrowRight } from 'react-icons/bs'
 import { useLogon } from '../../contexts/LogonContext'
 import { Link } from 'react-router-dom'
 

@@ -1,19 +1,19 @@
 const mongoose = require('mongoose')
 
-const seguidoresSchema = new mongoose.Schema({
-    seguidor_id: {
+const followSchema = new mongoose.Schema({
+    follower_id: {
         type:String,
         required: true
     },
-    seguindo_id: {
+    following_id: {
         type:String,
         required: true
     },
-    dataRealizada: {
+    dateFollow: {
         type: Date,
         required: true,
         default: new Date()
     }
 })
 
-module.exports = mongoose.model('Seguidores', seguidoresSchema)
+module.exports = mongoose.model('Follow', followSchema)

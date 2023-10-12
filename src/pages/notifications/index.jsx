@@ -10,9 +10,9 @@ export default function Notifications() {
 
     const loadNotifications = async() => {
         try {
-            const res = await fetch(`${EXPRESS_URL}seguidores/seguindo`, {
+            const res = await fetch(`${EXPRESS_URL}follow/seguindo`, {
                 method: 'POST',
-                body: JSON.stringify({ seguidor_id: null, seguindo_id: logonId}),
+                body: JSON.stringify({ follower_id: null, following_id: logonId}),
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -42,7 +42,7 @@ export default function Notifications() {
                         <p>Nenhuma notificação</p>
                     :
                         notifications.map( (value) => {
-                            return <Notificacao key={value._id} user_id={value.seguidor_id} post_id={null} data={value.dataRealizada}/>
+                            return <Notificacao key={value._id} user_id={value.follower_id} post_id={null} data={value.dateFollow}/>
                         })
                 }
             </main>

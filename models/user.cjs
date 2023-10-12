@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const usuarioSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     username: {
         type:String,
         required: true
@@ -10,15 +10,15 @@ const usuarioSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    senha: {
+    password: {
         type:String,
         required:true
     },
-    dataCadastro: {
+    dateRegister: {
         type: Date,
         required: true,
         default: new Date()
     }
 })
 
-module.exports = mongoose.model('Usuario', usuarioSchema)
+module.exports = mongoose.model('User', userSchema)

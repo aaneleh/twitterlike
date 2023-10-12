@@ -10,16 +10,16 @@ export default function Register() {
     const [ formData, setFormData ] = useState({
         username: '',
         email: '',
-        senha: '',
-        senhaconf: '',
-        dataCadastro: new Date()
+        password: '',
+        passwordConfirm: '',
+        dateRegister: new Date()
     })
     
     useEffect(() => {
             if(formData.email.includes("@") &&
                 formData.username.length > 4 &&
-                formData.senha.length > 4 &&
-                formData.senhaconf == formData.senha 
+                formData.password.length > 4 &&
+                formData.passwordConfirm == formData.password 
             )  setFormValid(true)
             else {
                 setFormValid(false)
@@ -86,20 +86,20 @@ export default function Register() {
                     type="text" name="username" />
                 </div>
                 <div className="grid grid-cols-4 gap-4">
-                    <p>Senha</p>
+                    <p>password</p>
                     <input onChange={handleInputChange} className="col-start-2 col-end-5
                     pb-0 transition-all focus:pb-2
                     outline-none bg-transparent 
                     border-slate-400 dark:border-slate-500 border-solid border-b-2" 
-                    type="password" name="senha" />
+                    type="password" name="password" />
                 </div>
                 <div className="grid grid-cols-4 gap-4">
-                    <p> Confirme Senha </p>
+                    <p> Confirme password </p>
                     <input onChange={handleInputChange} className="col-start-2 col-end-5
                     pb-0 transition-all focus:pb-2
                     outline-none bg-transparent 
                     border-slate-400 dark:border-slate-500 border-solid border-b-2" 
-                    type="password" name="senhaconf" />
+                    type="password" name="passwordConfirm" />
                 </div>
                 <div className="flex justify-center">
                     <input className= {`dark:bg-slate-950 dark:text-slate-200 bg-slate-200 text-slate-950
