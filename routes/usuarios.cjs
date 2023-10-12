@@ -88,22 +88,22 @@ router.patch('/:id', async(req, res) => {
 
 })
 
-/* router.delete('/:id', async(req, res)=> {
-    console.log('Req recebido delete user/:id ')
-
+router.delete('/', async(req, res)=> {
+    console.log('Req recebido delete user ' + req.body.id_user)
     try {
-        let usuario = await Usuario.findById(req.params.id)
-        
+        let usuario = await Usuario.findById(req.body.id_user)
         if(usuario == null) return res.status(404)
 
         await usuario.deleteOne()
-        res.json({message: "Usuario deletado"})
+
+        /* importar Seguidores e excluir toda entrada com seguindo = req.body.id_user */
+
+        res.sendStatus(200)
 
     } catch(err){
         res.status(500).json({ message: err.message })
         console.log(err)
     }
-
-}) */
+})
 
 module.exports = router

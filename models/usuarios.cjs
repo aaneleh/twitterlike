@@ -14,8 +14,10 @@ const usuarioSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    following: {
-        type: [String]
+    dataCadastro: {
+        type: Date,
+        required: true,
+        default: new Date()
     }
 })
 

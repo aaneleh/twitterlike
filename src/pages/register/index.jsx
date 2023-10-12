@@ -11,7 +11,8 @@ export default function Register() {
         username: '',
         email: '',
         senha: '',
-        senhaconf: ''
+        senhaconf: '',
+        dataCadastro: new Date()
     })
     
     useEffect(() => {

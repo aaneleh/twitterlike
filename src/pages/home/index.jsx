@@ -32,17 +32,21 @@ export default function Home() {
                 <Sidebar className=' fixed left-0 top-0'/>
             </aside>
             <main className="w-full flex flex-col items-center">
-                <Write/>
-                {
+                <div className="w-full pt-4 px-8">
+                    <Write/>
+                </div>
+                <div className="pt-2 w-full px-8">
+                    {
                     post.length == 0 ?
                         <p>Nenhuma postagem para exibir</p> 
-                    :
+                        :
                         post.map( (value) => {
                             return <Post key={value._id} user_id={value.user_id} post_id={value._id}>
                                     {value.post}
                                 </Post>
                         } )
-                }
+                    }
+                </div>
                 
             </main>
         </div>

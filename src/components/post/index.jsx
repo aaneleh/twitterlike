@@ -47,7 +47,7 @@ export default function Post({children, user_id, post_id}) {
 
 
     return (
-        <div className="flex flex-col items-center bg-slate-800 rounded w-64 lg:w-[32em] m-2">
+        <div className="flex flex-col items-center justify-center bg-slate-800 rounded w-full my-2">
             <div className='flex w-full gap-2 justify-between p-4 items-center border-b-[1px] '>
                 <Link to={`/user/${user_id}`} className='truncate'>
                     <p className='text-xl truncate'> {username} </p>
@@ -62,10 +62,9 @@ export default function Post({children, user_id, post_id}) {
                         <></>
                 }
             </div>
-            <p
-                className="w-full
+            <p className="w-full 
                 rounded slate-950 text-slate-200 
-                p-2 px-4  m-4 w-60 lg:w-[32em]">
+                p-8 px-4">
                 {children}
             </p>
             <div className='w-full flex justify-between px-8 pb-4'>

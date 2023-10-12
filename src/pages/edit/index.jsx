@@ -64,6 +64,24 @@ export default function Edit() {
         }
     }
 
+    const deletar = async() => {
+        if(!logonId) return
+        try {
+            const res = await fetch(EXPRESS_URL, {
+                method: 'DELETE',
+                body: JSON.stringify({id_user: logonId}),
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            })
+            console.log(res)
+            /* navigate(-1) */
+        } catch(err){
+            console.log(err)
+            alert(err)
+        }
+    }
+
     const handleSubmit = async(e) => {
         e.preventDefault()
     }
@@ -119,6 +137,7 @@ export default function Edit() {
                         <button className={`border-2 border-current p-2 rounded ${formValid ? "cursor-pointer" : "cursor-not-allowed"}`} onClick={editar} disabled={formValid ? false : true}>Salvar alterações</button>
                     </div>
                 </form>
+                <button onClick={deletar}>Excluir conta</button>
             </main>
         </div>
     )

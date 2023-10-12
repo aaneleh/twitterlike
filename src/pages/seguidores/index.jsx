@@ -19,7 +19,6 @@ export default function Seguidores() {
                 },
             })
             const json = await res.json()
-            console.log(json.query)
             if(res.status == 200) setSeguidores(json.query) 
         } catch (err) {
             console.log(err)
@@ -45,14 +44,16 @@ export default function Seguidores() {
                         Seguidores
                     </div>
                 </div>
+                <div className="pt-2 w-full p-8">
                     {
                         seguidores.length == 0 ?
-                            <p>Não tem nenhum seguidor</p>
+                        <p>Não tem nenhum seguidor</p>
                         :
-                            seguidores.map( (value) => {
-                                return <UserCard key={value._id} user_id={ value.seguidor_id}/>
-                            })
+                        seguidores.map( (value) => {
+                            return <UserCard key={value._id} user_id={ value.seguidor_id}/>
+                        })
                     }
+                </div>
             </main>
         </div>
     )

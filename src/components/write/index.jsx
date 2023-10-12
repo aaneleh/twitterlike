@@ -26,7 +26,8 @@ export default function Write() {
                 method: 'POST',
                 body: JSON.stringify({
                     'id': localStorage.getItem('logonId'),
-                    'post': tweet
+                    'post': tweet,
+                    'dataPublicacao': new Date()
                 }),
                 headers: {
                     'Content-Type': 'application/json'
@@ -44,21 +45,20 @@ export default function Write() {
         window.location.reload()
     }
     return (
-        <form onSubmit={handleSubmit} className="w-full flex flex-col items-center">
-            <div>
-                <textarea className="bg-transparent border-2 rounded slate-950 text-slate-200 p-2
-                resize-none active:outine-none lg:w-[32em]
-                relative left-6"
-                onChange={handleInputChange} name="tweet" cols="35" rows="5" placeholder="Lorem Ipsum..." >
+        <form onSubmit={handleSubmit} className="w-full flex flex-col items-center relative pb-4">
+
+                <textarea className="w-full h-36 bg-transparent border-2 rounded slate-950 text-slate-200 p-2
+                    resize-none active:outine-none "
+                    onChange={handleInputChange} name="tweet"  placeholder="Lorem Ipsum..." >
                 </textarea>
                 <button onClick={handleSubmit} disabled={!tweetValid}
-                    className={`relative right-4
+                    className={`absolute right-[-15px] bottom-0
                     bg-slate-200 rounded-full text-slate-950 p-2 pt-3 pr-3 text-2xl
                     border-2 hover:bg-slate-900 hover:text-slate-200 transition duration-125 col-start-2
                     ${tweetValid ? "cursor-pointer" : "cursor-not-allowed" }`}>
                     <BsSend/>
                 </button>
-            </div>
+
         </form>
     )
 }

@@ -53,7 +53,7 @@ export default function User() {
             </aside>
             <main className="w-full flex flex-col items-center">
                 <div className='w-full border-b-2 border-slate-700 px-16'>
-                    <div className="text-2xl h-24 flex justify-between w-full items-center pt-16 ">
+                    <div className="text-2xl h-16 flex justify-between w-full items-center pt-8 ">
                         <h1>{username}</h1>
                         { logonId == id ? 
                             <Link to="/edit"> <BsFillGearFill/> </Link>
@@ -61,16 +61,16 @@ export default function User() {
                             <Follow user_id={id}/>
                         }
                     </div>
-                    <div className='flex justify-between w-full items-center p-16 underline'>
-                        <Link to={`/user/${id}/seguindo`}> 
+                    <div className='flex justify-start gap-8 w-full items-center py-8 underline truncate'>
+                        <Link to={`/user/${id}/seguindo`} className='truncate'> 
                             Seguindo <ContSeguidor seguidor_id={id} seguindo_id={null} />
                         </Link> 
-                        <Link to={`/user/${id}/seguidores`}> 
+                        <Link to={`/user/${id}/seguidores`}  className='truncate'> 
                             Seguidores <ContSeguidor seguidor_id={null} seguindo_id={id} />
                         </Link> 
                     </div>
-                </div>
-                <div className="py-8">
+                </div> 
+                <div className="py-8 w-full p-8">
                     {
                         post.length == 0 ?
                             <p>Nenhuma postagem para exibir</p> 

@@ -1,9 +1,9 @@
 import { BsSearch } from 'react-icons/bs'
-import { Link } from 'react-router-dom'
 import { useEffect, useState } from "react";
 import { useLogon } from '../../contexts/LogonContext'
 import Sidebar from '../../components/sidebar'
 import Post from '../../components/post'
+import UserCard from '../../components/userCard';
 
 export default function Search() {
     const EXPRESS_URL = `${import.meta.env.VITE_EXPRESS_URL}`
@@ -81,7 +81,7 @@ export default function Search() {
                     <>
                         <section className="w-full flex flex-col items-center p-8 border-t-2 border-slate-700 ">
                             <h1 className='self-start text-lg'>Usuário</h1>
-                            <div className='flex flex-col justify-start w-full text-left p-8 gap-8'>
+                            <div className='w-full mt-4'>
                                 {
                                     search != '' && users.length == 0 ?
                                         <p>Nenhum usuário encontrado</p> 
@@ -89,18 +89,14 @@ export default function Search() {
                                     users.map( (value) => {
 
                                         /* FAZER UM COMPONENTE "UserCard" SEPARADO */
-                                        return <div key={value._id} >
-                                            <Link to={`/user/${value._id}`} >
-                                                <h3 className='underline'> {value.username} </h3>
-                                            </Link>
-                                        </div> 
+                                        return <UserCard key={value._id} user_id={value._id}/>
                                     } )
                                 }
                             </div>
                         </section>
                         <section className="w-full flex flex-col items-center p-8 border-t-2 border-slate-700 ">
                             <h1 className='self-start text-lg'>Postagens</h1>
-                            <div>
+                            <div className='w-full mt-4'>
                                 {
                                     posts.length == 0 ?
                                         <p>Nenhuma postagem encontrada</p> 

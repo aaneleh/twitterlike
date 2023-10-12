@@ -45,6 +45,7 @@ export default function Seguindo() {
                         Seguindo
                     </div>
                 </div>
+                <div className="pt-2 w-full p-8">
                     {
                         seguindo.length == 0 ?
                             <p>Ainda não segue ninguém</p>
@@ -52,7 +53,8 @@ export default function Seguindo() {
                         seguindo.map( (value) => {
                                 return <UserCard key={value._id} user_id={ value.seguindo_id}/>
                             })
-                    }
+                        }
+                </div>
             </main>
         </div>
     )

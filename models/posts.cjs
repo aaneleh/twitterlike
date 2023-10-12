@@ -8,6 +8,11 @@ const postSchema = new mongoose.Schema({
     post: {
         type:String,
         required: true
+    },
+    dataPublicacao: {
+        type: Date,
+        required: true,
+        default: new Date()
     }
 })
 

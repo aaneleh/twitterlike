@@ -37,11 +37,11 @@ router.post('/seguindo', async(req, res) => {
     try {
         let query;
         if(req.body.seguidor_id == null) {
-            query = await Seguidor.find({ seguindo_id: req.body.seguindo_id})
+            query = await Seguidor.find({ seguindo_id: req.body.seguindo_id}).sort({dataCriacao: -1})
         } else if(req.body.seguindo_id == null){
-            query = await Seguidor.find({ seguidor_id: req.body.seguidor_id})
+            query = await Seguidor.find({ seguidor_id: req.body.seguidor_id}).sort({dataCriacao: -1})
         } else {
-            query = await Seguidor.find({ seguidor_id: req.body.seguidor_id, seguindo_id: req.body.seguindo_id})
+            query = await Seguidor.find({ seguidor_id: req.body.seguidor_id, seguindo_id: req.body.seguindo_id}).sort({dataCriacao: -1})
         }
         return res.json({query: query})
     } catch (err){

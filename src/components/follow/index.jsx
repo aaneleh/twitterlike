@@ -27,7 +27,7 @@ export default function Follow({user_id}) {
         try{
             const res = await fetch(`${EXPRESS_URL}seguidores/`, {
                 method: 'POST',
-                body: JSON.stringify({seguidor_id: logonId, seguindo_id: user_id}),
+                body: JSON.stringify({seguidor_id: logonId, seguindo_id: user_id, dataRealizada: new Date()}),
                 headers: {
                     'Content-Type': 'application/json'
                 },

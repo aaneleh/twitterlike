@@ -19,7 +19,11 @@ App React utilizando banco de dados MongoDB integrandos com uma REST API com Exp
 - Pesquisar usuários e postagens  
 - Seguir / deixar de seguir outros usuários  
 - Lista e contagem de seguidores e usuarios seguidos
+- Registro de dia e hora das ações para organização
+- Página de notificações de novos seguidores
 
 ### Em progresso  
 
-- Página de notificações de novos seguidores 
+- Modelo e ações de curtir e contagem de curtidas
+- Mostrar curtidas junto as notificações em ordem cronológica
+- Excluir todas as ocorrencias do usuário nos informações de seguidores se a conta for excluida

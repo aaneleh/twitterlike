@@ -8,6 +8,11 @@ const seguidoresSchema = new mongoose.Schema({
     seguindo_id: {
         type:String,
         required: true
+    },
+    dataRealizada: {
+        type: Date,
+        required: true,
+        default: new Date()
     }
 })
 

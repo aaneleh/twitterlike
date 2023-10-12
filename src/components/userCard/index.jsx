@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useLogon } from '../../contexts/LogonContext'
 import { useState, useEffect } from 'react'
 import Follow from '../follow'
 import ContSeguidor from '../contSeguidor'
@@ -6,6 +7,7 @@ import ContSeguidor from '../contSeguidor'
 export default function UserCard({user_id}) {
     const EXPRESS_URL = `${import.meta.env.VITE_EXPRESS_URL}`
     const [username, setUsername] = useState('')
+    const { logonId } = useLogon()
 
     const loadUsername = async(user_id) => {
         try {
@@ -24,18 +26,24 @@ export default function UserCard({user_id}) {
 
     useEffect( () => {
         loadUsername(user_id)
+        console.log(logonId)
     }, [])
 
 
     return (
-        <div className="flex flex-col items-center bg-slate-800 rounded w-64 lg:w-[32em] m-2 p-4 ">
-            <div className='flex w-full gap-2 justify-between items-center pb-4 border-b-[1px] '>
+        <div className="w-full flex flex-col items-center bg-slate-800 rounded  m-2 p-4 ">
+            <div className='w-full flex gap-2 justify-between items-center pb-2'>
                 <Link to={`/user/${ user_id }`} className='truncate'>
                     <p className='text-xl truncate'> {username} </p>
                 </Link>
-                <Follow user_id={ user_id }/>
+                {
+                    user_id == logonId ?
+                        ""
+                    :
+                        <Follow user_id={ user_id }/>
+                }
             </div>
-            <div className='w-full flex flex-row justify-between align-center py-4 underline'>
+            <div className='w-full flex flex-row justify-start gap-8 py-4 underline'>
                 <Link to={`/user/${user_id}/seguindo`} > 
                     Seguindo <ContSeguidor seguidor_id={user_id} seguindo_id={null} />
                 </Link> 
