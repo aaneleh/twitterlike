@@ -21,6 +21,7 @@ export default function Write() {
 
     const handleSubmit = async(e) => {
         e.preventDefault()
+        console.log(localStorage.getItem('logonId'))
         try {
             const res = await fetch(EXPRESS_URL, {
                 method: 'POST',

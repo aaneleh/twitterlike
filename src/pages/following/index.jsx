@@ -11,7 +11,7 @@ export default function Following() {
 
     const loadFollowing = async (id) => {
         try {
-            const res = await fetch(`${EXPRESS_URL}seguidores/seguindo`, {
+            const res = await fetch(`${EXPRESS_URL}follow/seguindo`, {
                 method: 'POST',
                 body: JSON.stringify({follower_id: id, following_id: null}),
                 headers: {

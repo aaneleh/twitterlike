@@ -11,7 +11,7 @@ export default function Home() {
 
     const loadPosts = async () => {
         try {
-            const res = await fetch(`${EXPRESS_URL}posts/`, {
+            const res = await fetch(`${EXPRESS_URL}post/`, {
                 method: 'GET'
             })
             if(res.status == 200) setPosts(await res.json()) 

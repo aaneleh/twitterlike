@@ -2,18 +2,16 @@ import { BsChatLeftFill, BsFillHeartFill, BsTrash3 } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { useLogon } from '../../contexts/LogonContext'
+import LikeButton from '../likeButton'
 
 export default function Post({children, user_id, post_id}) {
     const EXPRESS_URL = `${import.meta.env.VITE_EXPRESS_URL}`
     const [username, setUsername] = useState('')
     const { logonId } = useLogon()
 
-    const curtir = () => {
-        
-    }
     const deletes = async () => {
         try {
-            const res = await fetch(`${EXPRESS_URL}posts/${post_id}`, {
+            const res = await fetch(`${EXPRESS_URL}post/${post_id}`, {
                 method: 'DELETE'
             })
             refreshPage()
@@ -71,7 +69,7 @@ export default function Post({children, user_id, post_id}) {
                 <Link to={`/post/${post_id}`}>
                     <BsChatLeftFill  className='overflow-visible fill-none stroke-2 stroke-slate-200 cursor-pointer hover:fill-current'/>
                 </Link>
-                <BsFillHeartFill onClick={curtir(post_id)} className='overflow-visible fill-none stroke-2 stroke-slate-200 cursor-pointer hover:fill-current'/>
+                <LikeButton post_id={post_id}/>
             </div>
         </div>
     )

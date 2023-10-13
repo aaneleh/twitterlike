@@ -47,10 +47,10 @@ router.get('/user/:user_id', async(req, res) => {
 //INSERE UM NOVO POST
 router.post('/', async(req, res) => {
     const post = new Post({
-        user_id: req.body.id,
-        post: req.body.post
+        user_id: req.body.user_id,
+        post: req.body.post,
+        datePosted: req.body.datePosted
     })
-
     try{
         const newPost = await post.save()
         console.log(newPost)

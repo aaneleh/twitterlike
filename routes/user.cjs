@@ -37,20 +37,22 @@ router.get('/search/:username', async(req, res) => {
 router.post('/', async(req, res) => {
     //procura o usuario, se já existe retorna um erro
     let query = await User.find({ email: req.body.email }, { _id: 1});
-    if(query.length) return res.status(400).json({message: "Este usuario já existe"})
-
+    if(query.length) {
+        console.log("email ja usado")
+        return res.status(400).json({message: "Este usuario já existe"})
+    }
     const user = new User({
         username: req.body.username,
         email: req.body.email,
-        password: req.body.senha
+        password: req.body.password
     })
-
+    console.log(user)
     try {
         //salva o usuario no bd
         const newUser = await user.save()
         console.log('Novo Usuario:', newUser)
 
-        return res.status(200).json({ id: novoUsuario._id.toString()})
+        return res.status(200).json({ id: newUser._id.toString()})
     } catch (err){
         return res.status(400)
     }

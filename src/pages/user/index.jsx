@@ -15,6 +15,7 @@ export default function User() {
     const [ username, setUsername ] = useState([])
 
     const loadUsername = async (id) => {
+        console.log(id)
         try {
             const res = await fetch(`${EXPRESS_URL}user/${id}`, {
                 method: 'GET'
@@ -73,7 +74,7 @@ export default function User() {
                 <div className="py-8 w-full p-8">
                     {
                         post.length == 0 ?
-                            <p>Nenhuma postagem para exibir</p> 
+                            <p className='text-center'>Nenhuma postagem para exibir</p> 
                         :
                             post.map( (value) => {
                                 return <Post key={value._id} user_id={value.user_id} post_id={value._id}>

@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 export default function NotificationCard({user_id, post_id, date}) {
     const EXPRESS_URL = `${import.meta.env.VITE_EXPRESS_URL}`
     const [username, setUsername] = useState('')
-    const [date, setDate ] = useState('')
+    const [timeAgo, setTimeAgo ] = useState('')
 
     const loadDate = () => {
         const dateNotification = new Date(date)
@@ -25,7 +25,7 @@ export default function NotificationCard({user_id, post_id, date}) {
                     timeText = "dia atrás"
                     if(timeDifference > 1)  timeText = "dias atrás"
         }}}
-        setDate(timeDifference + timeText)
+        setTimeAgo(timeDifference + timeText)
     }
 
     const loadUsername = async(user_id) => {
@@ -65,7 +65,7 @@ export default function NotificationCard({user_id, post_id, date}) {
                     }   
                 </p>
                 <p className='text-slate-500'>
-                    {date}
+                    {timeAgo}
                 </p>
             </div>
         </div>

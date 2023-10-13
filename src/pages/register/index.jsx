@@ -86,7 +86,7 @@ export default function Register() {
                     type="text" name="username" />
                 </div>
                 <div className="grid grid-cols-4 gap-4">
-                    <p>password</p>
+                    <p>Senha</p>
                     <input onChange={handleInputChange} className="col-start-2 col-end-5
                     pb-0 transition-all focus:pb-2
                     outline-none bg-transparent 
@@ -94,7 +94,7 @@ export default function Register() {
                     type="password" name="password" />
                 </div>
                 <div className="grid grid-cols-4 gap-4">
-                    <p> Confirme password </p>
+                    <p> Confirme senha </p>
                     <input onChange={handleInputChange} className="col-start-2 col-end-5
                     pb-0 transition-all focus:pb-2
                     outline-none bg-transparent 

@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"
 import { useLogon } from '../../contexts/LogonContext'
 import Sidebar from '../../components/sidebar'
-import Notificacao from "../../components/notificacao";
+import NotificationCard from "../../components/notificationCard"
 
 export default function Notifications() {
     const EXPRESS_URL = `${import.meta.env.VITE_EXPRESS_URL}`
@@ -37,14 +37,20 @@ export default function Notifications() {
                 <Sidebar className=' fixed left-0 top-0'/>
             </aside>
             <main className="w-full flex flex-col items-center p-8">
+            <div className='p-8 w-full border-b-[1px]'>
+                Notificações
+            </div>
+            <div className="pt-8 w-full p-8">
                 {
                     notifications.length <= 0 ?
                         <p>Nenhuma notificação</p>
                     :
                         notifications.map( (value) => {
-                            return <Notificacao key={value._id} user_id={value.follower_id} post_id={null} data={value.dateFollow}/>
+
+                            return <NotificationCard key={value._id} user_id={value.follower_id} post_id={null} data={value.dateFollow}/>
                         })
                 }
+            </div>
             </main>
         </div>
     )
