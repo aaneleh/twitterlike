@@ -65,7 +65,7 @@ export default function Register() {
         dark:bg-slate-950 bg-slate-200 
         flex flex-row justify-center items-center">
             <form onSubmit={handleSubmit}
-            className=" w-screen p-8 grid grid-cols-1 grid-rows-6 gap-4 items-start">
+            className="w-screen p-8 grid grid-cols-1 grid-rows-6 gap-4">
                 <div className="flex justify-center">
                     <h1 className="text-4xl font-bold">Bem-vindo</h1>
                 </div>

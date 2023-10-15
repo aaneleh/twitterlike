@@ -69,7 +69,7 @@ export default function Post({children, user_id, post_id}) {
                 <Link to={`/post/${post_id}`}>
                     <BsChatLeftFill  className='overflow-visible fill-none stroke-2 stroke-slate-200 cursor-pointer hover:fill-current'/>
                 </Link>
-                <LikeButton post_id={post_id}/>
+                <LikeButton poster_id={user_id} post_id={post_id}/>
             </div>
         </div>
     )

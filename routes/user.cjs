@@ -60,10 +60,10 @@ router.post('/', async(req, res) => {
 
 //PROCURA O USUARIO E RETORNA O ID
 router.post('/login', async(req, res) => {
-    let query = await User.find({ email: req.body.email, password: req.body.senha }, {_id: 1, username: 1});
+    let query = await User.find({ email: req.body.email, password: req.body.password }, {_id: 1, username: 1});
 
     if(!query.length) return res.status(400).json({message: "Este usuario não existe"})
-
+    
     return res.status(200).json({ id: query[0]._id.toString(), username: query[0].username.toString()})
 })
 
@@ -76,8 +76,8 @@ router.patch('/:id', async(req, res) => {
         
         if(req.body.username != null)
             user.username = req.body.username
-        if(req.body.senha != null)
-            user.password = req.body.senha
+        if(req.body.password != null)
+            user.password = req.body.password
 
         const userAtualizado = await user.save()
         console.log(userAtualizado)

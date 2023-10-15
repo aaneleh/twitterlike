@@ -66,6 +66,7 @@ export default function Edit() {
 
     const deletes = async() => {
         if(!logonId) return
+        if(confirm("Você tem certeza que deseja excluir sua conta? Essa ação não será reversível"))
         try {
             const res = await fetch(EXPRESS_URL, {
                 method: 'DELETE',
@@ -105,39 +106,41 @@ export default function Edit() {
     return (
         <div className="w-screen flex">
             <aside className="w-16 md:w-[18em]">
-                <Sidebar className=' fixed left-0 top-0'/>
+                <Sidebar className='fixed left-0 top-0'/>
             </aside>
-            <main className="w-full flex flex-col items-center">
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <h1>Editando seu perfil</h1>
-                    </div>
-                    <div>
+            <main className="w-full flex flex-col items-center p-8">
+                <div className='p-8 w-full border-b-[1px] text-xl'>
+                    Editando seu perfil
+                </div>
+                <form onSubmit={handleSubmit} className="p-8 w-full grid grid-cols-1 grid-rows-6 gap-4">
+                    <div className="grid grid-cols-4 gap-4 items-center">
                         <label htmlFor="username">Username: </label>
-                        <input className="text-slate-900"
+                        <input className="sm:col-start-2 col-start-3 col-end-5 bg-transparent border-b-[1px] pb-[2px] outline-none transition-all focus:border-b-[3px] focus:pb-0"
                             onChange={handleInputChange} value={formData.username} type="text" id="username" name="username"  />
                     </div>
-                    <div>
+                    <div className="grid grid-cols-4 gap-4 items-center">
                         <label htmlFor="email">Email: </label>
-                        <input className="text-slate-900"
+                        <input className="text-slate-400 sm:col-start-2 col-start-3 col-end-5 bg-transparent border-b-[1px] pb-[2px] outline-none transition-all focus:border-b-[3px] focus:pb-0"
                             onChange={handleInputChange} value={formData.email} type="text" id="email" name="email"  disabled={true}/>
                     </div>
-                    <div>
-                        <label htmlFor="password">password: </label>
-                        <input className="text-slate-900"
+                    <div className="grid grid-cols-4 gap-4 items-center">
+                        <label htmlFor="password">Senha: </label>
+                        <input className="sm:col-start-2 col-start-3 col-end-5 bg-transparent border-b-[1px] pb-[2px] outline-none transition-all focus:border-b-[3px] focus:pb-0"
                             onChange={handleInputChange} value={formData.password} type="password" id="password" name="password"  />
                     </div>
-                    <div>
-                        <label htmlFor="passwordConfirm">Confirme a password: </label>
-                        <input className="text-slate-900"
+                    <div className="grid grid-cols-4 gap-4 items-center">
+                        <label htmlFor="passwordConfirm" className="truncate">Confirme a senha: </label>
+                        <input className="sm:col-start-2 col-start-3 col-end-5 bg-transparent border-b-[1px] pb-[2px] outline-none transition-all focus:border-b-[3px] focus:pb-0"
                             onChange={handleInputChange} value={formData.passwordConfirm} type="password" id="passwordConfirm" name="passwordConfirm"  />
                     </div>
-                    <div>
+                    <div className="flex justify-center gap-4 items-center pt-8">
                         <button className="text-red-500" onClick={() => navigate(-1)}>Cancelar</button>
                         <button className={`border-2 border-current p-2 rounded ${formValid ? "cursor-pointer" : "cursor-not-allowed"}`} onClick={edit} disabled={formValid ? false : true}>Salvar alterações</button>
                     </div>
                 </form>
-                <button onClick={deletes}>Excluir conta</button>
+                <div className="underline h-full flex flex-col justify-end">
+                    <button onClick={deletes}>Excluir conta</button>
+                </div>
             </main>
         </div>
     )

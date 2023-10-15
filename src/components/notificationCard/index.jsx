@@ -6,12 +6,11 @@ export default function NotificationCard({user_id, post_id, date}) {
     const [username, setUsername] = useState('')
     const [timeAgo, setTimeAgo ] = useState('')
 
-    const loadDate = () => {
+    const loadTimeAgo = () => {
         const dateNotification = new Date(date)
         const currentDate = new Date()
         let timeDifference = Math.ceil((currentDate - dateNotification) / 1000)
         let timeText = "seg atrás"
-
         if(timeDifference >= 60) {
             timeDifference = Math.round(timeDifference / 60)
             timeText = "min atrás"
@@ -25,7 +24,7 @@ export default function NotificationCard({user_id, post_id, date}) {
                     timeText = "dia atrás"
                     if(timeDifference > 1)  timeText = "dias atrás"
         }}}
-        setTimeAgo(timeDifference + timeText)
+        setTimeAgo(timeDifference + " " + timeText)
     }
 
     const loadUsername = async(user_id) => {
@@ -45,7 +44,7 @@ export default function NotificationCard({user_id, post_id, date}) {
 
     useEffect( () => {
         loadUsername(user_id)
-        loadDate()
+        loadTimeAgo()
     }, [])
 
 
@@ -59,8 +58,8 @@ export default function NotificationCard({user_id, post_id, date}) {
                     { post_id == null ? 
                         <span> seguiu você</span>
                         :
-                        <span>curtiu seu 
-                            <Link to={`/post/${post_id}`}>post</Link>
+                        <span> curtiu seu 
+                            <Link className="underline ml-[0.5ch]" to={`/post/${post_id}`}>post</Link>
                         </span>
                     }   
                 </p>

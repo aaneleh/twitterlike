@@ -15,7 +15,7 @@ export default function User() {
     const [ username, setUsername ] = useState([])
 
     const loadUsername = async (id) => {
-        console.log(id)
+        /* console.log(id) */
         try {
             const res = await fetch(`${EXPRESS_URL}user/${id}`, {
                 method: 'GET'

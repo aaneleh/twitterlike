@@ -24,10 +24,12 @@ export default function Follow({user_id}) {
     }
 
     const follow = async() => {
+        console.log('follow')
+
         try{
             const res = await fetch(`${EXPRESS_URL}follow/`, {
                 method: 'POST',
-                body: JSON.stringify({follower_id: logonId, following_id: user_id, dataRealizada: new Date()}),
+                body: JSON.stringify({follower_id: logonId, following_id: user_id, dateFollow: new Date()}),
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -42,6 +44,7 @@ export default function Follow({user_id}) {
     }
 
     const unfollow = async() => {
+        console.log('unfollow')
         try{
             const res = await fetch(`${EXPRESS_URL}follow/deixarseguir`, {
                 method: 'DELETE',

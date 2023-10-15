@@ -15,12 +15,14 @@ router.get('/', async(req, res) => {
 //INSERE UMA NOVA RELAÇÃO
 router.post('/', async(req, res) => {
     //se ele já segue, retorna um erro
-    let query = await Follow.find({ follower_id: req.body.seguidor_id, following_id: req.body.seguindo_id});
-    if(query.length) return res.status(400).json({message: "Já segue esse usuário"})
-
+    let query = await Follow.find({ follower_id: req.body.follower_id, following_id: req.body.following_id});
+    if(query.length) {
+        console.log("Já segue esse usuário")
+        return res.status(400).json({message: "Já segue esse usuário"})
+    }
     const follow = new Follow({
-        follower_id: req.body.seguidor_id,
-        following_id: req.body.seguindo_id,
+        follower_id: req.body.follower_id,
+        following_id: req.body.following_id,
     })
 
     try {
@@ -37,11 +39,11 @@ router.post('/seguindo', async(req, res) => {
     try {
         let query;
         if(req.body.seguidor_id == null) {
-            query = await Follow.find({ following_id: req.body.seguindo_id}).sort({dateFollow: -1})
+            query = await Follow.find({ following_id: req.body.following_id}).sort({dateFollow: -1})
         } else if(req.body.seguindo_id == null){
-            query = await Follow.find({ follower_id: req.body.seguidor_id}).sort({dateFollow: -1})
+            query = await Follow.find({ follower_id: req.body.follower_id}).sort({dateFollow: -1})
         } else {
-            query = await Follow.find({ follower_id: req.body.seguidor_id, following_id: req.body.seguindo_id}).sort({dateFollow: -1})
+            query = await Follow.find({ follower_id: req.body.follower_id, following_id: req.body.following_id}).sort({dateFollow: -1})
         }
         return res.json({query: query})
     } catch (err){
@@ -52,7 +54,7 @@ router.post('/seguindo', async(req, res) => {
 //
 router.delete('/deixarseguir', async(req, res)=> {
     try {
-        let following = await Follow.findOne({ follower_id: req.body.seguidor_id, following_id: req.body.seguindo_id})
+        let following = await Follow.findOne({ follower_id: req.body.follower_id, following_id: req.body.following_id})
         if(following == null) return res.status(404)
 
         await following.deleteOne()

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { useLogon } from '../../contexts/LogonContext'
 
-export default function LikeButton({post_id}) {
+export default function LikeButton({poster_id, post_id}) {
     const EXPRESS_URL = `${import.meta.env.VITE_EXPRESS_URL}`
     const [ likesCounter, setLikesCounter] = useState(99)
     const [ isLiked, setLiked ] = useState(false)
@@ -13,7 +13,7 @@ export default function LikeButton({post_id}) {
         try {
             const res = await fetch(`${EXPRESS_URL}like/`, {
                 method: 'POST',
-                body: JSON.stringify({ user_id: logonId, post_id: post_id, dateLiked: new Date() }),
+                body: JSON.stringify({ user_id: logonId, poster_id: poster_id, post_id: post_id, dateLiked: new Date() }),
                 headers: {
                     'Content-Type': 'application/json'
                 }
