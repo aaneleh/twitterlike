@@ -22,6 +22,7 @@ App React utilizando banco de dados MongoDB integrandos com uma REST API com Exp
 - Registro de dia e hora das ações para organização
 - Página de notificações de novos seguidores
 - Modelo e ações de curtir e contagem de curtidas
+- Responder e ver respostas de posts
 
 ### Em progresso  
 

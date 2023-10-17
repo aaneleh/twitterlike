@@ -14,6 +14,7 @@ import Search from './pages/search'
 import Edit from './pages/edit'
 import Followers from './pages/followers'
 import Following from './pages/following'
+import PostResponses from './pages/postResponses'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Router>
@@ -30,6 +31,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path='/notifications' element={ <Notifications/> }/>
           <Route path='/search' element={ <Search/> }/>
           <Route path='/edit' element={ <Edit/> }/>
+          <Route path='/post/:post_id' element={ <PostResponses/> }/>
         </Routes>
       </main>
     </LogonProvider>

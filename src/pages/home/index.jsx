@@ -32,8 +32,8 @@ export default function Home() {
                 <Sidebar className=' fixed left-0 top-0'/>
             </aside>
             <main className="w-full flex flex-col items-center">
-                <div className="w-full pt-4 px-8">
-                    <Write/>
+                <div className="w-full pt-16 px-8">
+                    <Write parent_post={null}/>
                 </div>
                 <div className="pt-2 w-full px-8">
                     {

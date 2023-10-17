@@ -9,6 +9,11 @@ const postSchema = new mongoose.Schema({
         type:String,
         required: true
     },
+    id_parent_post: {
+        type:String,
+        required: false,
+        default: null
+    },
     datePosted: {
         type: Date,
         required: true,

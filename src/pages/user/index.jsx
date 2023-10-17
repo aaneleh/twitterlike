@@ -48,11 +48,11 @@ export default function User() {
     }, [])
 
     return (
-        <div className="w-screen flex">
+        <div className="w-screen flex overflow-x-hidden">
             <aside className="w-16 md:w-[18em]">
                 <Sidebar className=' fixed left-0 top-0'/>
             </aside>
-            <main className="w-full flex flex-col items-center">
+            <main className="w-full flex flex-col items-center pt-8">
                 <div className='w-full border-b-2 border-slate-700 px-16'>
                     <div className="text-2xl h-16 flex justify-between w-full items-center pt-8 ">
                         <h1>{username}</h1>

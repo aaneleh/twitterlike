@@ -33,8 +33,7 @@ export default function Search() {
             if(res.status == 200) setUsers(await res.json()) 
             
         } catch (err) {
-            console.log(err)
-            alert("error")
+            console.log("Erro procurando usuarios: ", err)
         }
     }
 
@@ -45,8 +44,7 @@ export default function Search() {
             })
             if(res.status == 200) setPosts(await res.json()) 
         } catch (err) {
-            console.log(err)
-            alert("error")
+            console.log("Erro procurando posts: ", err)
         }
     }
 
@@ -58,8 +56,6 @@ export default function Search() {
         searchUsers(search)
         searchPosts(search)
         setSearchMade(true)
-        console.log(users)
-        console.log(posts)
     }
     
     const handleSubmit = (e) => {
@@ -71,7 +67,7 @@ export default function Search() {
             <aside className="w-16 md:w-[18em]">
                 <Sidebar className="fixed left-0 top-0"/>
             </aside>
-            <main className="w-full flex flex-col items-center ">
+            <main className="w-full flex flex-col items-center pt-8">
                 <form onSubmit={handleSubmit} className='flex items-center gap-8 p-8'>
                     <input onChange={handleInputChange} type="text" name="search" className='h-8 w-64 outline-none rounded border-2 border-slate-200 bg-transparent p-2'/>
                     <button onClick={loadSearch}> <BsSearch className='text-2xl'/> </button>
@@ -87,8 +83,6 @@ export default function Search() {
                                         <p>Nenhum usuário encontrado</p> 
                                     :
                                     users.map( (value) => {
-
-                                        /* FAZER UM COMPONENTE "UserCard" SEPARADO */
                                         return <UserCard key={value._id} user_id={value._id}/>
                                     } )
                                 }
@@ -110,7 +104,7 @@ export default function Search() {
                             </div>
                         </section>
                     </>
-                : <></>
+                : <> </>
                 }
                 
             </main>

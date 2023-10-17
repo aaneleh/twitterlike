@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { BsSend } from 'react-icons/bs'
 
-export default function Write() {
+export default function Write({parent_post}) {
     const EXPRESS_URL = `${import.meta.env.VITE_EXPRESS_URL}post`
     const [ postValid, setPostValid ] = useState(false)
     const [ post, setPost ] = useState('')
@@ -28,6 +28,7 @@ export default function Write() {
                 body: JSON.stringify({
                     'user_id': localStorage.getItem('logonId'),
                     'post': post,
+                    'id_parent_post': parent_post,
                     'datePosted': new Date()
                 }),
                 headers: {

@@ -5,7 +5,7 @@ import { useLogon } from '../../contexts/LogonContext'
 
 export default function LikeButton({poster_id, post_id}) {
     const EXPRESS_URL = `${import.meta.env.VITE_EXPRESS_URL}`
-    const [ likesCounter, setLikesCounter] = useState(99)
+    const [ likesCounter, setLikesCounter] = useState(0)
     const [ isLiked, setLiked ] = useState(false)
     const { logonId } = useLogon()
 
@@ -21,8 +21,7 @@ export default function LikeButton({poster_id, post_id}) {
             setLiked(true)
             setLikesCounter(likesCounter + 1)
         } catch (err) {
-            console.log(err)
-            alert("Erro!")
+            console.log("Erro curtindo o post: ", err)
         }
     }
     
@@ -38,33 +37,31 @@ export default function LikeButton({poster_id, post_id}) {
             setLiked(false)
             setLikesCounter(likesCounter - 1)
         } catch(err){
-            console.log(err)
-            alert("Erro!")
+            console.log("Erro descurtindo o post: ", err)
         }
     }
     
     const loadUsersLiked = async(post_id) => {
+        let usersliked
         try {
-
-            const res = await fetch(`${EXPRESS_URL}like/${logonId}/${post_id}`, { 
-                method: 'GET' 
-            } )
-            console.log(res)
-            if(res.status == 200) {
-                const usersliked = await res.json()
-                setLikesCounter(usersliked.allUsers.length)
-                setLiked(usersliked.thisUser)
-            }
+            const res = await fetch(`${EXPRESS_URL}like/${logonId}/${post_id}`)
+            usersliked = await res.json()
         } catch (err) {
-            console.log(err)
-            alert("Erro!")
+            console.log("Erro carregando as curtidas: ", err)
+        } finally {
+            setLikesCounter(usersliked.length)
+            usersliked.map(value => {
+                if(value.user_id === logonId) {
+                    setLiked(true)
+                }
+            })
         }
     } 
 
     useEffect( () => {
+        setLiked(false)
         loadUsersLiked(post_id)
-    }, [])
-    
+    }, [post_id])
 
     return (
         <div className='flex items-center gap-4'>

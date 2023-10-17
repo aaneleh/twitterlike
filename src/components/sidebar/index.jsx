@@ -1,4 +1,4 @@
-import { BsHouse, BsPersonCircle, BsBell, BsSearch, BsBoxArrowRight } from 'react-icons/bs'
+import { BsHouse, BsPersonCircle, BsBell, BsSearch, BsBoxArrowRight, BsPlusCircleFill } from 'react-icons/bs'
 import { useLogon } from '../../contexts/LogonContext'
 import { Link } from 'react-router-dom'
 
@@ -36,12 +36,15 @@ export default function Sidebar() {
                 <p className='text-base invisible absolute col-span-2 md:visible md:relative truncate'>Notificações</p> 
             </Link>
 
-{/*             <div 
-                className='p-2 rounded-full cursor-pointer hover:scale-125 transition
-                md:grid grid-cols-3 items-center gap-8' >
-                <BsPlusCircleFill/>
+        {/* @todo ONCLICK MUDA O STATE DE UM DIALOG Q CONTEM O <WRITE parent_id={null}/>  */}
+            <div 
+                className='cursor-pointer p-2 rounded-full transition duration-200
+                md:grid grid-cols-3 items-center gap-8 
+                hover:bg-slate-950 hover:text-slate-200
+                dark:hover:bg-slate-200 dark:hover:text-slate-950'>
+                <BsPlusCircleFill/> 
                 <p className='text-base invisible absolute col-span-2 md:visible md:relative truncate'>Postar Tweet</p> 
-            </div>   */}
+            </div>  
 
             <Link to="/search" 
                 className='p-2 rounded-full transition duration-200
