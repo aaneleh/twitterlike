@@ -50,6 +50,7 @@ export default function PostResponses() {
         checkLogin()
         loadPosts()
         loadResponses()
+        console.log(mainPost)
     }, [post_id])
 
 /*     useEffect( () => {
@@ -64,7 +65,7 @@ export default function PostResponses() {
             <main className="w-full flex flex-col items-center">
                 <div className='w-full p-16'>
                     <div>
-                        <Post user_id={mainPost.user_id} post_id={mainPost._id} >
+                        <Post user_id={mainPost.user_id} post_id={mainPost._id} parent_post={mainPost.id_parent_post}>
                             {mainPost.post} 
                         </Post>
                     </div>
@@ -76,7 +77,7 @@ export default function PostResponses() {
                             {  
                                 responses.length > 0 ?
                                     responses.map((value) => {
-                                        return <Post key={value._id} user_id={value.user_id} post_id={value._id} className="py-8">
+                                        return <Post key={value._id} user_id={value.user_id} post_id={value._id} className="py-8" parent_post={null}>
                                             {value.post}
                                         </Post>
                                     })

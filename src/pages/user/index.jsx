@@ -77,7 +77,7 @@ export default function User() {
                             <p className='text-center'>Nenhuma postagem para exibir</p> 
                         :
                             post.map( (value) => {
-                                return <Post key={value._id} user_id={value.user_id} post_id={value._id}>
+                                return <Post key={value._id} user_id={value.user_id} post_id={value._id} parent_post={value.id_parent_post}>
                                         {value.post}
                                     </Post>
                                 } )
