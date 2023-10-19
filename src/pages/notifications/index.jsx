@@ -31,63 +31,31 @@ export default function Notifications() {
             let notf
             let l = 0, f = 0
 
-            while(follows.length > f || likes.length > l){
-                while(likes.length > l){
-                    while(follows.length > f){
-                        //se foi adicionado todos os follows
-                        if(f == follows.length) { 
-                            notf = {
-                                _id: likes[l]._id,
-                                user_id: likes[l].user_id,
-                                post_id: likes[l].post_id,
-                                date: likes[l].dateLiked
-                            }
-                            sortedNotifications.push(notf)
-                            l++
-                        //se foi adicionado todos os likes
-                        } else if(l == likes.length) {
-                            notf = {
-                                _id: follows[f]._id,
-                                user_id: follows[f].follower_id,
-                                post_id: null,
-                                date: follows[f].dateFollow
-                            }
-                            sortedNotifications.push(notf)
-                            f++
-                        }
-                        //organização "normal"
-                        if(likes.length > l && follows.length > f) {
-                            if(new Date(follows[f].dateFollow) - new Date(likes[l].dateLiked) < 0) {
-                                notf = {
-                                    _id: likes[l]._id,
-                                    user_id: likes[l].user_id,
-                                    post_id: likes[l].post_id,
-                                    date: likes[l].dateLiked
-                                }
-                                sortedNotifications.push(notf)
-                                l ++
-
-                            } else {
-                                notf = {
-                                    _id: follows[f]._id,
-                                    user_id: follows[f].follower_id,
-                                    post_id: null,
-                                    date: follows[f].dateFollow
-                                }
-                                sortedNotifications.push(notf)
-                                f++
-                            }
-                        }
+            while(follows.length > f || likes.length > l){                
+                if(f == follows.length || new Date(follows[f].dateFollow) - new Date(likes[l].dateLiked) < 0) {
+                    notf = {
+                        _id: likes[l]._id,
+                        user_id: likes[l].user_id,
+                        post_id: likes[l].post_id,
+                        date: likes[l].dateLiked
                     }
+                    sortedNotifications.push(notf)
+                    l ++
+                }
+                if(l == likes.length || new Date(follows[f].dateFollow) - new Date(likes[l].dateLiked) > 0){
+                    notf = {
+                        _id: follows[f]._id,
+                        user_id: follows[f].follower_id,
+                        post_id: null,
+                        date: follows[f].dateFollow
+                    }
+                    sortedNotifications.push(notf)
+                    f++
                 }
             }
-
             setNotifications(sortedNotifications)
-
         }
     }
-    
-
 
     useEffect(() => {
         setNotifications([])
