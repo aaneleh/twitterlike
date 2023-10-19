@@ -72,6 +72,7 @@ export default function LikeButton({poster_id, post_id}) {
                     <BsFillHeartFill onClick={like} className='overflow-visible fill-none stroke-2 stroke-slate-200 cursor-pointer hover:fill-current'/>
             }
             <span> { likesCounter } </span>
+            {/* @todo clicando na quantidade leva a lista de todos q curtiram */}
         </div>
     )
 }

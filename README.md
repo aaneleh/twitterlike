@@ -14,17 +14,17 @@ App React utilizando banco de dados MongoDB integrandos com uma REST API com Exp
 ### Funcionalidades  
 
 - Registrar e logar usuários  
-- Editar dados do usuario logado  
+- Editar dados do usuario logado e excluir sua conta
 - Criar e excluir postagens  
 - Pesquisar usuários e postagens  
 - Seguir / deixar de seguir outros usuários  
 - Lista e contagem de seguidores e usuarios seguidos
-- Registro de dia e hora das ações para organização
-- Página de notificações de novos seguidores
-- Modelo e ações de curtir e contagem de curtidas
+- Curtir / descurtir posts e contagem de curtidas
+- Página de notificações de novos seguidores e curtidas
 - Responder e ver respostas de posts
+- Mostrar curtidas junto as notificações em ordem cronológica
 
 ### Em progresso  
 
-- Mostrar curtidas junto as notificações em ordem cronológica
 - Excluir todas as ocorrencias do usuário nos informações de seguidores se a conta for excluida, mesmo se pra posts e curtidas
+- Criptografar senhas

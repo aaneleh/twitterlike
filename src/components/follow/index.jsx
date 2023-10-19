@@ -6,6 +6,7 @@ export default function Follow({user_id}) {
     const [ isFollowing, setFollowing] = useState(false)
     const { logonId } = useLogon()
 
+    /* @todo checar se ess isFollowing ta funcionando */
     const loadIsFollowing = async() => {
         try {
             const res = await fetch(`${EXPRESS_URL}follow/seguindo`, {

@@ -62,7 +62,7 @@ router.get('/:user_id/:post_id', async(req, res) => {
 //SELECIONA PELO DONO DO POST
 router.get('/:poster_id', async(req, res) => {
     try {
-        const likes = await Like.find({ poster_id: req.params.poster_id })
+        const likes = await Like.find({ poster_id: req.params.poster_id }).sort({dateLiked: -1})
         res.json(likes)
     } catch (err){
         res.status(500).json({message: err.message})

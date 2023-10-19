@@ -34,6 +34,7 @@ router.get('/search/:username', async(req, res) => {
 })
 
 //INSERE UM NOVO USUARIO
+/* @todo salvar a senha criptografada */
 router.post('/', async(req, res) => {
     //procura o usuario, se já existe retorna um erro
     let query = await User.find({ email: req.body.email }, { _id: 1});
@@ -98,7 +99,7 @@ router.delete('/', async(req, res)=> {
 
         await user.deleteOne()
 
-        /* importar Seguidores e excluir toda entrada com seguindo = req.body.id_user */
+        /* @todo excluir também todos posts (user_id = req.body.id_user) e relacoes de seguindo = req.body.id_user */
 
         res.sendStatus(200)
 

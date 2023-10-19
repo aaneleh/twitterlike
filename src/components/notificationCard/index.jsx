@@ -9,8 +9,9 @@ export default function NotificationCard({user_id, post_id, date}) {
     const loadTimeAgo = () => {
         const dateNotification = new Date(date)
         const currentDate = new Date()
-        let timeDifference = Math.ceil((currentDate - dateNotification) / 1000)
+        let timeDifference = Math.ceil( Math.abs(currentDate - dateNotification) / 1000)
         let timeText = "seg atrás"
+
         if(timeDifference >= 60) {
             timeDifference = Math.round(timeDifference / 60)
             timeText = "min atrás"
@@ -22,6 +23,7 @@ export default function NotificationCard({user_id, post_id, date}) {
                 if(timeDifference >= 24) {
                     timeDifference = Math.floor(timeDifference / 24)
                     timeText = "dia atrás"
+                    
                     if(timeDifference > 1)  timeText = "dias atrás"
         }}}
         setTimeAgo(timeDifference + " " + timeText)
@@ -63,7 +65,7 @@ export default function NotificationCard({user_id, post_id, date}) {
                         </span>
                     }   
                 </p>
-                <p className='text-slate-500'>
+                <p className='text-slate-500 truncate'>
                     {timeAgo}
                 </p>
             </div>

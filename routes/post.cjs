@@ -14,7 +14,7 @@ router.get('/', async(req, res) => {
 
 //SELECIONA APENAS UM PELO ID
 router.get('/:id_post', async(req, res) => {
-    console.log("req post id = " + req.params.id_post)
+    /* console.log("req post id = " + req.params.id_post) */
     try {
         const post = await Post.findById(req.params.id_post)
         res.json(post)
@@ -25,10 +25,10 @@ router.get('/:id_post', async(req, res) => {
 
 //SELECIONA PELO ID DO POST "PAI"
 router.get('/responses/:id_parent', async(req, res) => {
-    console.log("req post parent id = " + req.params.id_parent)
+    /* console.log("req post parent id = " + req.params.id_parent) */
     try {
         const responses = await Post.find({id_parent_post: req.params.id_parent})
-        console.log(responses)
+        /* console.log(responses) */
         res.json(responses)
     } catch (err){
         res.status(500).json({message: err.message})
@@ -48,7 +48,7 @@ router.get('/search/:content', async(req, res) => {
 
 //SELECIONA TODOS POSTS DE UM USUARIO
 router.get('/user/:user_id', async(req, res) => {
-    console.log("req posts user:" + req.params.id_user)
+    /* console.log("req posts user:" + req.params.id_user) */
     try {
         const postsUser = await Post.find({'user_id': req.params.user_id})
         res.json(postsUser)
