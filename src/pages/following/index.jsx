@@ -10,6 +10,7 @@ export default function Following() {
     const [ following, setFollowing ] = useState([])
 
     const loadFollowing = async (id) => {
+        let json
         try {
             const res = await fetch(`${EXPRESS_URL}follow/seguindo`, {
                 method: 'POST',
@@ -18,12 +19,12 @@ export default function Following() {
                     'Content-Type': 'application/json'
                 },
             })
-            const json = await res.json()
-            console.log(json.query)
-            if(res.status == 200) setFollowing(json.query) 
+            json = await res.json()
         } catch (err) {
             console.log(err)
             alert("error")
+        } finally {
+            setFollowing(json) 
         }
     }
 
@@ -31,6 +32,10 @@ export default function Following() {
         loadFollowing(id)
     }, [])
 
+    useEffect( () => {
+        loadFollowing(id)
+    }, [id])
+    
     return (
         <div className="w-screen flex">
             <aside className="w-16 md:w-[18em]">

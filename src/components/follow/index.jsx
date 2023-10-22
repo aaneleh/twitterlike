@@ -6,8 +6,8 @@ export default function Follow({user_id}) {
     const [ isFollowing, setFollowing] = useState(false)
     const { logonId } = useLogon()
 
-    /* @todo checar se ess isFollowing ta funcionando */
     const loadIsFollowing = async() => {
+        let json
         try {
             const res = await fetch(`${EXPRESS_URL}follow/seguindo`, {
                 method: 'POST',
@@ -16,11 +16,13 @@ export default function Follow({user_id}) {
                     'Content-Type': 'application/json'
                 },
             })
-            const json = await res.json()
-            setFollowing(json.quant > 0)
+            json = await res.json()
+            
         } catch (err){
             console.log(err)
             alert("Ocorreu um erro!")
+        } finally {
+            setFollowing(json.length > 0)
         }
     }
 

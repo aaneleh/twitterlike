@@ -49,8 +49,7 @@ router.get('/', async(req, res) => {
 })
 
 //SELECIONA ID DE USUARIOS QUE CURTIRAM CERTO POST
-router.get('/:user_id/:post_id', async(req, res) => {
-    /* console.log("req ao post: ", req.params.post_id, ", user: ", req.params.user_id) */
+router.get('/:post_id', async(req, res) => {
     try {
         const allUsers = await Like.find({ post_id: req.params.post_id }, { _id: 0, user_id: 1})
         res.json(allUsers)

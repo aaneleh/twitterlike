@@ -1,41 +1,32 @@
 import { BsArrowLeft } from 'react-icons/bs'
 import { useEffect, useState } from "react";
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Sidebar from '../../components/sidebar'
 import UserCard from '../../components/userCard'
 
-export default function Followers() {
+export default function LikesList() {
     const EXPRESS_URL = `${import.meta.env.VITE_EXPRESS_URL}`
-    const { id } = useParams();
-    const [ followers, setFollowers ] = useState([])
+    const navigate = useNavigate();
+    const { post_id } = useParams();
+    const [ users, setUsers ] = useState([])
 
-    const loadFollowers = async (id) => {
+    const loadUsers = async (id) => {
         let json
         try {
-            const res = await fetch(`${EXPRESS_URL}follow/seguindo`, {
-                method: 'POST',
-                body: JSON.stringify({follower_id: null, following_id: id}),
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-            })
+            const res = await fetch(`${EXPRESS_URL}like/${id}`)
             json = await res.json()
         } catch (err) {
             console.log(err)
             alert("error")
         } finally {
             console.log(json)
-            setFollowers(json) 
+            setUsers(json)
         }
     }
 
     useEffect( () => {
-        loadFollowers(id)
+        loadUsers(post_id)
     }, [])
-
-    useEffect( () => {
-        loadFollowers(id)
-    }, [id])
 
     return (
         <div className="w-screen flex">
@@ -45,20 +36,20 @@ export default function Followers() {
             <main className="w-full flex flex-col items-center ">
                 <div className='p-8 w-full'>
                     <div className='flex text-xl items-center justify-start w-full pb-8 gap-16 border-b-[1px]'>
-                        <Link to={`/user/${id}`}>
+                        <button onClick={() => navigate(-1)}>
                             <BsArrowLeft className='text-2xl'/>
-                        </Link>
-                        Seguidores
+                        </button>
+                        Curtidas
                     </div>
                 </div>
                 <div className="pt-2 w-full p-8">
                     {
-                        followers.length == 0 ?
-                        <p>Não tem nenhum seguidor</p>
+                        users.length == 0 ?
+                            <p>Ninguem curtiu esse post ainda</p>
                         :
-                        followers.map( (value) => {
-                            return <UserCard key={value._id} user_id={ value.follower_id}/>
-                        })
+                        users.map( (value) => {
+                            return <UserCard key={value.user_id} user_id={ value.user_id}/>
+                        }) 
                     }
                 </div>
             </main>

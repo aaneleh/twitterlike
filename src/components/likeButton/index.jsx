@@ -44,7 +44,7 @@ export default function LikeButton({poster_id, post_id}) {
     const loadUsersLiked = async(post_id) => {
         let usersliked
         try {
-            const res = await fetch(`${EXPRESS_URL}like/${logonId}/${post_id}`)
+            const res = await fetch(`${EXPRESS_URL}like/${post_id}`)
             usersliked = await res.json()
         } catch (err) {
             console.log("Erro carregando as curtidas: ", err)
@@ -71,8 +71,9 @@ export default function LikeButton({poster_id, post_id}) {
                 :
                     <BsFillHeartFill onClick={like} className='overflow-visible fill-none stroke-2 stroke-slate-200 cursor-pointer hover:fill-current'/>
             }
-            <span> { likesCounter } </span>
-            {/* @todo clicando na quantidade leva a lista de todos q curtiram */}
+            <Link to={`/likes/${post_id}`} className='cursor-pointer hover:underline'>
+                <span> { likesCounter } </span>
+            </Link>
         </div>
     )
 }

@@ -47,6 +47,12 @@ export default function User() {
         loadUsername(id)
     }, [])
 
+    useEffect( () => {
+        checkLogin()
+        loadPosts(id)
+        loadUsername(id)
+    }, [id, logonId])
+
     return (
         <div className="w-screen flex overflow-x-hidden">
             <aside className="w-16 md:w-[18em]">
