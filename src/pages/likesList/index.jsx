@@ -26,7 +26,7 @@ export default function LikesList() {
 
     useEffect( () => {
         loadUsers(post_id)
-    }, [])
+    }, [post_id]) 
 
     return (
         <div className="w-screen flex">

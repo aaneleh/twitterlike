@@ -73,7 +73,7 @@ export default function Login() {
                     type="text" name="email"/>
                 </div>
                 <div className="grid grid-cols-4 gap-4">
-                    <label>password</label>
+                    <label>Senha</label>
                     <input onChange={handleInputChange} className="col-start-2 col-end-5
                     pb-0 transition-all focus:pb-2
                     outline-none bg-transparent 

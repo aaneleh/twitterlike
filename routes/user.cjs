@@ -1,4 +1,5 @@
 const express = require('express')
+const bcrypt = require('bcrypt')
 const router = express.Router()
 const User = require('../models/user.cjs')
 
@@ -34,7 +35,6 @@ router.get('/search/:username', async(req, res) => {
 })
 
 //INSERE UM NOVO USUARIO
-/* @todo salvar a senha criptografada */
 router.post('/', async(req, res) => {
     //procura o usuario, se já existe retorna um erro
     let query = await User.find({ email: req.body.email }, { _id: 1});
@@ -42,13 +42,13 @@ router.post('/', async(req, res) => {
         console.log("email ja usado")
         return res.status(400).json({message: "Este usuario já existe"})
     }
-    const user = new User({
-        username: req.body.username,
-        email: req.body.email,
-        password: req.body.password
-    })
-    console.log(user)
     try {
+        const hashedPassword = await bcrypt.hash(req.body.password, 10)
+        const user = new User({
+            username: req.body.username,
+            email: req.body.email,
+            password: hashedPassword
+        })
         //salva o usuario no bd
         const newUser = await user.save()
         console.log('Novo Usuario:', newUser)
@@ -61,11 +61,18 @@ router.post('/', async(req, res) => {
 
 //PROCURA O USUARIO E RETORNA O ID
 router.post('/login', async(req, res) => {
-    let query = await User.find({ email: req.body.email, password: req.body.password }, {_id: 1, username: 1});
+    let query = await User.find({ email: req.body.email})
 
     if(!query.length) return res.status(400).json({message: "Este usuario não existe"})
+
+    try {
+        if(await bcrypt.compare(req.body.password, query[0].password.toString())) 
+            return res.status(200).json({ id: query[0]._id.toString(), username: query[0].username.toString()})
+    } catch{
+        return res.status(400).json({message: "Login inválido"})
+    }
     
-    return res.status(200).json({ id: query[0]._id.toString(), username: query[0].username.toString()})
+    return res.status(400).json({message: "Erro desconhecido"})
 })
 
 //ALTERA UM USUARIO
@@ -77,9 +84,12 @@ router.patch('/:id', async(req, res) => {
         
         if(req.body.username != null)
             user.username = req.body.username
-        if(req.body.password != null)
-            user.password = req.body.password
-
+        if(req.body.password != null) 
+            try {
+                user.password = await bcrypt.hash(req.body.password, 10)
+            } catch{
+                res.sendStatus(500)
+            }
         const userAtualizado = await user.save()
         console.log(userAtualizado)
         res.sendStatus(200)
