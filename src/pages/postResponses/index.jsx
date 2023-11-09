@@ -18,16 +18,16 @@ export default function PostResponses() {
     const [ responses, setResponses ] = useState([])
 
     const loadPosts = async () => {
-        let postDate
+        let postData
         try {
             const res = await fetch(`${EXPRESS_URL}post/${post_id}`, {
                 method: 'GET'
             })
-            postDate = await res.json()
+            postData = await res.json()
         } catch (err) {
             console.log("Erro carregando o post: ", err)
         } finally {
-            setMainPost(postDate)
+            setMainPost(postData)
         }
     }
 
@@ -35,13 +35,10 @@ export default function PostResponses() {
         let json;
         try {
             const res = await fetch(`${EXPRESS_URL}post/responses/${post_id}`)
-/*             console.log(await res) */
             json = await res.json()
-            
         } catch (err) {
             console.log("Erro carregando respostas: ", err)
         } finally {
-/*             console.log(json) */
             setResponses(json)
         }
     }
@@ -50,28 +47,33 @@ export default function PostResponses() {
         checkLogin()
         loadPosts()
         loadResponses()
-        console.log(mainPost)
     }, [post_id])
-
-/*     useEffect( () => {
-        console.log(responses) 
-    }, [responses]) */
 
     return (
         <div className="w-screen flex">
-            <aside className="w-16 md:w-[18em]">
-                <Sidebar className=' fixed left-0 top-0'/>
+            <aside className="w-16 md:w-[28em]">
+                <Sidebar className='fixed left-0 top-0'/>
             </aside>
             <main className="w-full flex flex-col items-center">
                 <div className='w-full p-16'>
                     <div>
-                        <Post user_id={mainPost.user_id} post_id={mainPost._id} parent_post={mainPost.id_parent_post}>
-                            {mainPost.post} 
-                        </Post>
+                        {
+                            mainPost == null ?
+                                <div> Esse post foi excluído! {console.log(mainPost)} </div>
+                            :
+                                <Post user_id={mainPost.user_id} post_id={mainPost._id} parent_post={mainPost.id_parent_post}>
+                                    {mainPost.post} 
+                                </Post>
+                        }
                     </div>
                     <div className="border-l-[2px] border-slate-500 w-full pl-16 mt-8 pt-4">
-                        <div className="pb-8">
-                            <Write parent_post={mainPost._id}/>
+                        <div className="pb-8 select-none">
+                            {
+                                mainPost == null ?
+                                    <></>
+                                :
+                                    <Write parent_post={null} />
+                            }
                         </div>
                         <div>
                             {  

@@ -40,7 +40,6 @@ export default function Post({children, user_id, post_id, parent_post}) {
     }
 
     useEffect( () => {
-        /* console.log(children, user_id, post_id) */
         loadUsername(user_id)
     }, [])
 
@@ -49,9 +48,15 @@ export default function Post({children, user_id, post_id, parent_post}) {
         <div className="flex flex-col items-center justify-center bg-slate-800 rounded w-full my-2">
             <div className='flex w-full gap-2 justify-between p-4 items-center border-b-[1px] '>
                 <div className='flex gap-2 items-center'>
-                    <Link to={`/user/${user_id}`} className='truncate'>
-                        <p className='text-xl truncate'> {username} </p>
-                    </Link>
+                    { 
+                        username == '' ? 
+                            <p className='text-base truncate text-slate-400'> conta excluida </p>
+                        :
+                            <Link to={`/user/${user_id}`} className='truncate'>
+                                <p className='text-xl truncate'> {username} </p>
+                            </Link>
+                    }
+
                     {
                         parent_post != null ?
                             <Link className='underline' to={`/post/${parent_post}`}>

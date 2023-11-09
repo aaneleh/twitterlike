@@ -2,6 +2,7 @@ const express = require('express')
 const bcrypt = require('bcrypt')
 const router = express.Router()
 const User = require('../models/user.cjs')
+const Follow = require('../models/follow.cjs')
 
 router.get('/', async(req, res) => {
     console.log('Req recebido get user/ ')
@@ -106,13 +107,12 @@ router.delete('/', async(req, res)=> {
     try {
         let user = await User.findById(req.body.id_user)
         if(user == null) return res.status(404)
-
         await user.deleteOne()
 
-        /* @todo excluir também todos posts (user_id = req.body.id_user) e relacoes de seguindo = req.body.id_user */
+        await Follow.deleteMany({ follower_id: req.body.id_user })//user deletado deixa de seguir todos
+        await Follow.deleteMany({ following_id: req.body.id_user }) //quem segue o user deletado, deixa de seguir
 
         res.sendStatus(200)
-
     } catch(err){
         res.status(500).json({ message: err.message })
         console.log(err)

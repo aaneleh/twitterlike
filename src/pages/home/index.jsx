@@ -27,15 +27,15 @@ export default function Home() {
     }, [])
 
     return (
-        <div className="w-screen flex">
-            <aside className="w-16 md:w-[18em]">
-                <Sidebar className=' fixed left-0 top-0'/>
+        <div className="w-screen flex bg-slate-900">
+            <aside className="w-16 md:w-[28em]">
+                <Sidebar className='fixed left-0 top-0'/>
             </aside>
-            <main className="w-full flex flex-col items-center">
+            <main className="w-full flex flex-col items-center ">
                 <div className="w-full pt-16 px-8">
                     <Write parent_post={null}/>
                 </div>
-                <div className="pt-2 w-full px-8">
+                <div className="pt-2 w-full px-8 ">
                     {
                     post.length == 0 ?
                         <p>Nenhuma postagem para exibir</p> 

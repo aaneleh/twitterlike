@@ -14,6 +14,7 @@ export default function Sidebar() {
             <div className='h-screen p-8 pt-16 flex flex-col items-center gap-16 text-4xl
                 w-16 md:w-[8em] md:items-start
                 overflow-hidden
+                fixed
                 border-r-2 border-slate-950 dark:border-slate-500'>
                 <Link to="/" 
                     className='p-2 rounded-full transition duration-200	

@@ -7,7 +7,7 @@ export default function Edit() {
     const EXPRESS_URL = `${import.meta.env.VITE_EXPRESS_URL}user`
     const navigate = useNavigate();
 
-    const { checkLogin, logonId } = useLogon()
+    const { checkLogin, logonId, logoff } = useLogon()
     const [ formValid, setFormValid ] = useState(false)
     const [ formData, setFormData ] = useState({
         username: '',
@@ -38,7 +38,7 @@ export default function Edit() {
                     email: json[0].email,
                     password: json[0].password,
                     passwordConfirm: json[0].password
-                })
+                }) /* @todo receber a senha como? criptografada ñ seria uma boa */
             }
         } catch(err){
             console.log(err)
@@ -76,7 +76,7 @@ export default function Edit() {
                 },
             })
             console.log(res)
-            navigate(-1)
+            logoff()
         } catch(err){
             console.log(err)
             alert(err)
@@ -105,7 +105,7 @@ export default function Edit() {
 
     return (
         <div className="w-screen flex">
-            <aside className="w-16 md:w-[18em]">
+            <aside className="w-16 md:w-[28em]">
                 <Sidebar className='fixed left-0 top-0'/>
             </aside>
             <main className="w-full flex flex-col items-center p-8">
@@ -138,7 +138,7 @@ export default function Edit() {
                         <button className={`border-2 border-current p-2 rounded ${formValid ? "cursor-pointer" : "cursor-not-allowed"}`} onClick={edit} disabled={formValid ? false : true}>Salvar alterações</button>
                     </div>
                 </form>
-                <div className="underline h-full flex flex-col justify-end">
+                <div className="underline h-full flex flex-col justify-end text-red-500">
                     <button onClick={deletes}>Excluir conta</button>
                 </div>
             </main>

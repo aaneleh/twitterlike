@@ -64,8 +64,8 @@ export default function Search() {
 
     return (
         <div className="w-screen flex">
-            <aside className="w-16 md:w-[18em]">
-                <Sidebar className="fixed left-0 top-0"/>
+            <aside className="w-16 md:w-[28em]">
+                <Sidebar className='fixed left-0 top-0'/>
             </aside>
             <main className="w-full flex flex-col items-center pt-8">
                 <form onSubmit={handleSubmit} className='flex items-center gap-8 p-8'>

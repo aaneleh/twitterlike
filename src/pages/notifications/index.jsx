@@ -65,8 +65,8 @@ export default function Notifications() {
 
     return (
         <div className="w-screen flex">
-            <aside className="w-16 md:w-[18em]">
-                <Sidebar className=' fixed left-0 top-0'/>
+            <aside className="w-16 md:w-[28em]">
+                <Sidebar className='fixed left-0 top-0'/>
             </aside>
             <main className="w-full flex flex-col items-center p-8">
                 <div className='p-8 w-full border-b-[1px] text-xl'>
