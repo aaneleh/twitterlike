@@ -5,7 +5,7 @@ const Post = require('../models/post.cjs')
 //SELECIONA TODOS
 router.get('/', async(req, res) => {
     try {
-        const posts = await Post.find()
+        const posts = await Post.find().sort({datePosted: -1})
         res.json(posts)
     } catch (err){
         res.status(500).json({message: err.message})
@@ -27,7 +27,7 @@ router.get('/:id_post', async(req, res) => {
 router.get('/responses/:id_parent', async(req, res) => {
     /* console.log("req post parent id = " + req.params.id_parent) */
     try {
-        const responses = await Post.find({id_parent_post: req.params.id_parent})
+        const responses = await Post.find({id_parent_post: req.params.id_parent}).sort({datePosted: -1})
         /* console.log(responses) */
         res.json(responses)
     } catch (err){
@@ -50,7 +50,7 @@ router.get('/search/:content', async(req, res) => {
 router.get('/user/:user_id', async(req, res) => {
     /* console.log("req posts user:" + req.params.id_user) */
     try {
-        const postsUser = await Post.find({'user_id': req.params.user_id})
+        const postsUser = await Post.find({'user_id': req.params.user_id}).sort({datePosted: -1})
         res.json(postsUser)
     } catch (err){
         res.status(500).json({message: err.message})

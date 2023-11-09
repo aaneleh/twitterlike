@@ -54,7 +54,7 @@ router.post('/', async(req, res) => {
         const newUser = await user.save()
         console.log('Novo Usuario:', newUser)
 
-        return res.status(200).json({ id: newUser._id.toString()})
+        return res.status(200).json({ id: newUser._id.toString(), username: newUser.username.toString()})
     } catch (err){
         return res.status(400)
     }

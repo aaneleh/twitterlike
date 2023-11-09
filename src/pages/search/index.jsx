@@ -96,7 +96,7 @@ export default function Search() {
                                         <p>Nenhuma postagem encontrada</p> 
                                     :
                                         posts.map( (value) => {
-                                            return <Post key={value._id} user_id={value.user_id} post_id={value._id}>
+                                            return <Post key={value._id} user_id={value.user_id} post_id={value._id} date={value.datePosted}>
                                                     {value.post}
                                                 </Post>
                                             } )

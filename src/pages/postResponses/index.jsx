@@ -61,7 +61,7 @@ export default function PostResponses() {
                             mainPost == null ?
                                 <div> Esse post foi excluído! {console.log(mainPost)} </div>
                             :
-                                <Post user_id={mainPost.user_id} post_id={mainPost._id} parent_post={mainPost.id_parent_post}>
+                                <Post user_id={mainPost.user_id} post_id={mainPost._id} parent_post={mainPost.id_parent_post} date={mainPost.datePosted}>
                                     {mainPost.post} 
                                 </Post>
                         }
@@ -79,7 +79,7 @@ export default function PostResponses() {
                             {  
                                 responses.length > 0 ?
                                     responses.map((value) => {
-                                        return <Post key={value._id} user_id={value.user_id} post_id={value._id} className="py-8" parent_post={null}>
+                                        return <Post className="py-8" key={value._id} user_id={value.user_id} post_id={value._id} parent_post={null} date={value.datePosted}>
                                             {value.post}
                                         </Post>
                                     })

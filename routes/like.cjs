@@ -59,7 +59,7 @@ router.get('/:post_id', async(req, res) => {
 })
 
 //SELECIONA PELO DONO DO POST
-router.get('/:poster_id', async(req, res) => {
+router.get('/poster/:poster_id', async(req, res) => {
     try {
         const likes = await Like.find({ poster_id: req.params.poster_id }).sort({dateLiked: -1})
         res.json(likes)

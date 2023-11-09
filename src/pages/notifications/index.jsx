@@ -18,21 +18,24 @@ export default function Notifications() {
                     'Content-Type': 'application/json'
                 }
             })
-            const resLikes = await fetch(`${EXPRESS_URL}like/${logonId}`, { 
+            const resLikes = await fetch(`${EXPRESS_URL}like/poster/${logonId}`, { 
                 method: 'GET'
             } )
+            
             follows = await resFollows.json()
             likes = await resLikes.json() 
         } catch(err){
             console.log("Erro carregando as notificacoes: ", err)
         } finally {
-            follows = follows.query
+            
             let sortedNotifications = []
             let notf
             let l = 0, f = 0
 
-            while(follows.length > f || likes.length > l){                
-                if(f == follows.length || new Date(follows[f].dateFollow) - new Date(likes[l].dateLiked) < 0) {
+            while(follows.length > f || likes.length > l){             
+                
+                if(likes.length > 0 && (follows.length == 0 || follows.length == f || (new Date(follows[f].dateFollow) - new Date(likes[l].dateLiked) < 0) )) {
+                    //push like
                     notf = {
                         _id: likes[l]._id,
                         user_id: likes[l].user_id,
@@ -42,7 +45,8 @@ export default function Notifications() {
                     sortedNotifications.push(notf)
                     l ++
                 }
-                if(l == likes.length || new Date(follows[f].dateFollow) - new Date(likes[l].dateLiked) > 0){
+                if(follows.length > 0 && ( likes.length == 0 || likes.length == l || (new Date(follows[f].dateFollow) - new Date(likes[l].dateLiked) > 0) )){
+                    //push follow
                     notf = {
                         _id: follows[f]._id,
                         user_id: follows[f].follower_id,
