@@ -36,9 +36,9 @@ export default function Edit() {
                 setFormData({
                     username: json[0].username,
                     email: json[0].email,
-                    password: json[0].password,
-                    passwordConfirm: json[0].password
-                }) /* @todo receber a senha como? criptografada ñ seria uma boa */
+                    password: '',
+                    passwordConfirm: ''
+                }) 
             }
         } catch(err){
             console.log(err)
@@ -89,8 +89,8 @@ export default function Edit() {
 
     useEffect(() => {
         if( formData.username.length > 4 &&
-            formData.password.length > 4 &&
-            formData.passwordConfirm == formData.password 
+            ( formData.password.length == 0 || 
+                (formData.password.length > 4 && formData.passwordConfirm == formData.password ) )
         )  setFormValid(true)
         else {
             setFormValid(false)
@@ -118,15 +118,17 @@ export default function Edit() {
                         <input className="sm:col-start-2 col-start-3 col-end-5 bg-transparent border-b-[1px] pb-[2px] outline-none transition-all focus:border-b-[3px] focus:pb-0"
                             onChange={handleInputChange} value={formData.username} type="text" id="username" name="username"  />
                     </div>
-                    <div className="grid grid-cols-4 gap-4 items-center">
+                    <div className="grid grid-cols-4 gap-4 items-center" title="Seu email não pode ser alterado">
                         <label htmlFor="email">Email: </label>
                         <input className="text-slate-400 sm:col-start-2 col-start-3 col-end-5 bg-transparent border-b-[1px] pb-[2px] outline-none transition-all focus:border-b-[3px] focus:pb-0"
-                            onChange={handleInputChange} value={formData.email} type="text" id="email" name="email"  disabled={true}/>
+                            onChange={handleInputChange} value={formData.email} type="text" id="email" name="email" disabled={true}/>
                     </div>
+
+                    
                     <div className="grid grid-cols-4 gap-4 items-center">
-                        <label htmlFor="password">Senha: </label>
+                        <label htmlFor="password">Nova senha: </label>
                         <input className="sm:col-start-2 col-start-3 col-end-5 bg-transparent border-b-[1px] pb-[2px] outline-none transition-all focus:border-b-[3px] focus:pb-0"
-                            onChange={handleInputChange} value={formData.password} type="password" id="password" name="password"  />
+                            onChange={handleInputChange} value={formData.password} type="password" id="password" name="password" placeholder="Preencha apenas para alterar" />
                     </div>
                     <div className="grid grid-cols-4 gap-4 items-center">
                         <label htmlFor="passwordConfirm" className="truncate">Confirme a senha: </label>
