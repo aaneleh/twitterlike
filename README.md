@@ -21,3 +21,7 @@ App React utilizando banco de dados MongoDB integrandos com uma REST API com Exp
 - Responder e ver respostas de posts
 - Pesquisar usuários e postagens  
 - Curtir / descurtir posts e contagem de curtidas
+<br> 
+
+[![Thumbnail](https://img.youtube.com/vi/AOk1_-1RqCc/0.jpg)](https://youtu.be/AOk1_-1RqCc)  
+[https://youtu.be/AOk1_-1RqCc](https://youtu.be/AOk1_-1RqCc)
