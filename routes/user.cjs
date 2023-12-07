@@ -5,7 +5,7 @@ const User = require('../models/user.cjs')
 const Follow = require('../models/follow.cjs')
 
 router.get('/', async(req, res) => {
-    console.log('Req recebido get user/ ')
+    console.log('Retornando todos os usuarios...')
     try {
         const users = await User.find()
         res.json(users)
@@ -16,6 +16,7 @@ router.get('/', async(req, res) => {
 
 //SELECIONA USUARIO PELO ID
 router.get('/:id_user', async(req, res) => {
+    console.log(`Procurando usuario "${req.params.id_user}"...`)
     try {
         const users = await User.find({_id: req.params.id_user})
         res.json(users)
@@ -26,6 +27,7 @@ router.get('/:id_user', async(req, res) => {
 
 //SELECIONA USUARIO PELO USERNAME
 router.get('/search/:username', async(req, res) => {
+    console.log(`Procurando usuario "${req.params.username}"...`)
     try {
         const users = await User.find({'username': {$regex : req.params.username} })
         res.json(users)
@@ -37,6 +39,7 @@ router.get('/search/:username', async(req, res) => {
 
 //INSERE UM NOVO USUARIO
 router.post('/', async(req, res) => {
+    console.log('Criando usuario...')
     //procura o usuario, se já existe retorna um erro
     let query = await User.find({ email: req.body.email }, { _id: 1});
     if(query.length) {
@@ -62,6 +65,8 @@ router.post('/', async(req, res) => {
 
 //PROCURA O USUARIO E RETORNA O ID
 router.post('/login', async(req, res) => {
+    console.log('Fazendo login...')
+
     let query = await User.find({ email: req.body.email})
 
     if(!query.length) return res.status(400).json({message: "Este usuario não existe"})
@@ -78,6 +83,8 @@ router.post('/login', async(req, res) => {
 
 //ALTERA UM USUARIO
 router.patch('/:id', async(req, res) => {
+    console.log(`Editando usuario "${req.params.id}"...`)
+
     try{
         let user = await User.findById(req.params.id)
         console.log(user)
@@ -103,7 +110,7 @@ router.patch('/:id', async(req, res) => {
 })
 
 router.delete('/', async(req, res)=> {
-    console.log('Req recebido delete user ' + req.body.id_user)
+    console.log('Deletando usuario ' + req.body.id_user)
     try {
         let user = await User.findById(req.body.id_user)
         if(user == null) return res.status(404)

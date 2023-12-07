@@ -59,7 +59,7 @@ export default function PostResponses() {
                     <div>
                         {
                             mainPost == null ?
-                                <div> Esse post foi excluído! {console.log(mainPost)} </div>
+                                <div> Esse post foi excluído! </div>
                             :
                                 <Post user_id={mainPost.user_id} post_id={mainPost._id} parent_post={mainPost.id_parent_post} date={mainPost.datePosted}>
                                     {mainPost.post} 
@@ -72,7 +72,7 @@ export default function PostResponses() {
                                 mainPost == null ?
                                     <></>
                                 :
-                                    <Write parent_post={null} />
+                                    <Write parent_post={mainPost._id} />
                             }
                         </div>
                         <div>

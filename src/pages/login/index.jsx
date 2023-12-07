@@ -40,16 +40,15 @@ export default function Login() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-            })
+            });
 
-            let json = await res.json()
-            login(await json.id, await json.username)
-
-            if(res.status == 200) navigate('/')
-                else alert("Login inválido!") 
+            let json = await res.json();
+            login(json.id, json.username)
+            navigate('/')
+            
         } catch (err) {
             console.log(err)
-            alert("error")
+            alert("Login inválido!")
         }
     }
 

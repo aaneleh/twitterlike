@@ -40,7 +40,6 @@ export default function NotificationCard({user_id, post_id, date}) {
             }
         } catch (err) {
             console.log(err)
-            alert("error")
         }
     }
 
@@ -53,10 +52,15 @@ export default function NotificationCard({user_id, post_id, date}) {
     return (
         <div className="w-full flex flex-col items-center bg-slate-800 rounded m-2 p-4 py-10 ">
             <div className='w-full flex gap-2 justify-between items-center pb-2'>
-                <p>
-                    <Link to={`/user/${ user_id }`} className='truncate'>
-                        <span className='text-lg underline'>{username}</span>
-                    </Link>
+                <p >
+                    {
+                        username == '' ? 
+                                <span className='text-base truncate text-slate-400'> conta excluida </span>
+                            :
+                                <Link to={`/user/${ user_id }`} className='truncate'>
+                                    <span className='text-lg underline'>{username}</span>
+                                </Link>
+                    }
                     { post_id == null ? 
                         <span> seguiu você</span>
                         :

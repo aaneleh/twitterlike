@@ -28,7 +28,7 @@ export default function Home() {
 
     return (
         <div className="w-screen flex bg-slate-900">
-            <aside className="w-16 md:w-[28em]">
+            <aside className="w-16 md:w-[28em] ">
                 <Sidebar className='fixed left-0 top-0'/>
             </aside>
             <main className="w-full flex flex-col items-center ">
@@ -38,7 +38,7 @@ export default function Home() {
                 <div className="pt-2 w-full px-8 ">
                     {
                     post.length == 0 ?
-                        <p>Nenhuma postagem para exibir</p> 
+                        <p></p> 
                         :
                         post.map( (value) => {
                             return <Post key={value._id} user_id={value.user_id} post_id={value._id} parent_post={value.id_parent_post} date={value.datePosted}>

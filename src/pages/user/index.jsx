@@ -64,22 +64,24 @@ export default function User() {
                         <p> Esse usuário não existe mais</p>
                     :
                         <>
-                            <div className='w-full border-b-2 border-slate-700 px-16'>
-                                <div className="text-2xl h-16 flex justify-between w-full items-center pt-8 ">
-                                    <h1>{username}</h1>
-                                    { logonId == id ? 
-                                        <Link to="/edit"> <BsFillGearFill/> </Link>
-                                        : 
-                                        <Follow user_id={id}/>
-                                    }
-                                </div>
-                                <div className='flex justify-start gap-8 w-full items-center py-8 underline truncate'>
-                                    <Link to={`/user/${id}/following`} className='truncate'> 
-                                        Seguindo <FollowCounter follower_id={id} following_id={null} />
-                                    </Link> 
-                                    <Link to={`/user/${id}/followers`}  className='truncate'> 
-                                        Seguidores <FollowCounter follower_id={null} following_id={id} />
-                                    </Link> 
+                            <div className='w-full px-8'>
+                                <div className='border-b-2 border-slate-500 px-8'>
+                                    <div className="text-2xl h-16 flex justify-between w-full items-center pt-8 ">
+                                        <h1>{username}</h1>
+                                        { logonId == id ? 
+                                            <Link to="/edit"> <BsFillGearFill/> </Link>
+                                            : 
+                                            <Follow user_id={id}/>
+                                        }
+                                    </div>
+                                    <div className='flex justify-start gap-8 w-full items-center py-8 underline truncate '>
+                                        <Link to={`/user/${id}/following`} className='truncate'> 
+                                            Seguindo <FollowCounter follower_id={id} following_id={null} />
+                                        </Link> 
+                                        <Link to={`/user/${id}/followers`}  className='truncate'> 
+                                            Seguidores <FollowCounter follower_id={null} following_id={id} />
+                                        </Link> 
+                                    </div>
                                 </div>
                             </div> 
                             <div className="py-8 w-full p-8">

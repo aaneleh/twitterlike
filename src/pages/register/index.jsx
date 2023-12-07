@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react'
 import { useLogon } from '../../contexts/LogonContext'
 
 export default function Register() {
-    const EXPRESS_URL = `${import.meta.env.VITE_EXPRESS_URL}user`
+    const EXPRESS_URL = `${import.meta.env.VITE_EXPRESS_URL}user/`
+
     const navigate = useNavigate()
     const { login } = useLogon()
     const [ formValid, setFormValid ] = useState(false)
@@ -45,16 +46,17 @@ export default function Register() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-            })
-
-            let json = await res.json()
-            login(await json.id, await json.username)
-
-            if(res.status == 200) navigate('/')
-                else alert("Os dados passados são inválidos!")
+            });
+            const json = await res.json();
+            console.log(json)
+            if(json.id){
+                login(json.id, json.username)
+                navigate('/')
+            } else {
+                alert("Informações incorretas")
+            }
         } catch (err) {
             console.log(err)
-            alert("error")
         }
     }
 
